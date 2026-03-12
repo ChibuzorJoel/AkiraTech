@@ -1,0 +1,89 @@
+/* HEADER */
+
+.header {
+    width: 100%;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  
+  /* NAV CONTAINER */
+  
+  .nav-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 15px 30px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* LOGO */
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .logo img {
+    width: 40px;
+  }
+  
+  .brand-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #3b1b4d;
+  }
+  
+  .brand-name .tech {
+    color: #6bbf73;
+  }
+  
+  /* NAVIGATION */
+  
+  .nav-links {
+    display: flex;
+    gap: 30px;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #3b1b4d;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+  
+  .nav-links a:hover {
+    color: #6bbf73;
+  }
+  
+  /* CTA BUTTON */
+  
+  .contact-btn {
+    background: linear-gradient(135deg, #3b1b4d, #6bbf73);
+    color: white;
+    padding: 10px 22px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  
+  .contact-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  }
+  
+  /* RESPONSIVE */
+  
+  @media (max-width: 768px) {
+  
+    .nav-links {
+      display: none;
+    }
+  
+  }
