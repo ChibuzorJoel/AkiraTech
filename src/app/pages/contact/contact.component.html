@@ -1,1 +1,287 @@
-<p>contact works!</p>
+<!-- ══════════════════════════════════════════════════════════
+     CONTACT PAGE — Akiira Tech
+     ══════════════════════════════════════════════════════════ -->
+
+<!-- HERO -->
+<section class="ct-hero">
+    <div class="ct-hero-bg"></div>
+    <div class="ct-orb ct-orb-1"></div>
+    <div class="ct-orb ct-orb-2"></div>
+    <div class="ct-orb ct-orb-3"></div>
+  
+    <div class="ct-hero-inner">
+      <div class="eyebrow">Get In Touch</div>
+      <h1>Let's Build Something<br><span>Great Together</span></h1>
+      <p>Free consultation · No obligation · Response within 24 hours</p>
+  
+      <div class="ct-trust-row">
+        <div class="ctr-item">
+          <span class="ctr-icon">⚡</span>
+          <span>Fast Response</span>
+        </div>
+        <div class="ctr-sep"></div>
+        <div class="ctr-item">
+          <span class="ctr-icon">🔒</span>
+          <span>100% Confidential</span>
+        </div>
+        <div class="ctr-sep"></div>
+        <div class="ctr-item">
+          <span class="ctr-icon">🎯</span>
+          <span>No Spam, Ever</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+  
+  
+  <!-- MAIN CONTACT SECTION -->
+  <section class="section-pad contact-section">
+    <div class="contact-grid">
+  
+      <!-- LEFT: Info -->
+      <div class="contact-info" #reveal>
+  
+        <div class="eyebrow">Reach Us</div>
+        <h2 class="section-heading">We'd Love to <span>Hear From You</span></h2>
+        <p class="section-sub" style="margin-bottom:36px">
+          Whether you have a project in mind or just want to explore what's possible — we're always here.
+        </p>
+  
+        <div class="contact-items">
+          <a href="mailto:akiiratech@gmail.com" class="ci-item glass-card">
+            <div class="ci-icon email">✉️</div>
+            <div class="ci-text">
+              <div class="ci-label">Email Us</div>
+              <div class="ci-val">akiiratech&#64;gmail.com</div>
+            </div>
+            <span class="ci-arrow">→</span>
+          </a>
+          <a href="https://wa.me/2349021706710" class="ci-item glass-card">
+            <div class="ci-icon whatsapp">💬</div>
+            <div class="ci-text">
+              <div class="ci-label">WhatsApp</div>
+              <div class="ci-val">+234 810 357 6104</div>
+            </div>
+            <span class="ci-arrow">→</span>
+          </a>
+          <div class="ci-item glass-card">
+            <div class="ci-icon location">📍</div>
+            <div class="ci-text">
+              <div class="ci-label">Location</div>
+              <div class="ci-val">Lagos, Nigeria</div>
+            </div>
+          </div>
+          <div class="ci-item glass-card">
+            <div class="ci-icon hours">⏰</div>
+            <div class="ci-text">
+              <div class="ci-label">Working Hours</div>
+              <div class="ci-val">Mon–Fri · 9AM–6PM WAT</div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Response time badge -->
+        <div class="response-badge">
+          <div class="rb-dot"></div>
+          <span>We typically respond within <strong>2–4 hours</strong> during business hours</span>
+        </div>
+  
+        <!-- Social links -->
+        <div class="ct-socials">
+          <div class="ct-soc-label">Find us online</div>
+          <div class="ct-soc-links">
+            <a href="https://wa.me/2349021706710" class="soc-btn">
+              <span>💬</span>WhatsApp
+            </a>
+            <a href="mailto:akiiratech@gmail.com" class="soc-btn">
+              <span>✉️</span>Email
+            </a>
+            <a href="#" class="soc-btn">
+              <span>𝕏</span>Twitter
+            </a>
+            <a href="#" class="soc-btn">
+              <span>in</span>LinkedIn
+            </a>
+          </div>
+        </div>
+  
+        <!-- What to expect -->
+        <div class="ct-steps">
+          <div class="ct-steps-title">What happens next?</div>
+          <div class="ct-step">
+            <div class="cstep-num">01</div>
+            <div>
+              <strong>We review your message</strong>
+              <p>Our team reads every submission carefully within a few hours.</p>
+            </div>
+          </div>
+          <div class="ct-step">
+            <div class="cstep-num">02</div>
+            <div>
+              <strong>We reach out</strong>
+              <p>You'll receive a personalised response — never a template.</p>
+            </div>
+          </div>
+          <div class="ct-step">
+            <div class="cstep-num">03</div>
+            <div>
+              <strong>Free consultation</strong>
+              <p>We schedule a call to understand your goals in depth.</p>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+  
+      <!-- RIGHT: Form -->
+      <div class="contact-form-wrap" #reveal>
+        <div class="contact-form glass-card">
+  
+          <!-- Form state -->
+          <div *ngIf="!submitted">
+  
+            <div class="cf-head">
+              <h3>Send Us a Message</h3>
+              <p>Fill in the details below and we'll get back to you shortly.</p>
+            </div>
+  
+            <!-- Validation summary banner -->
+            <div class="cf-error-banner" *ngIf="formSubmitted && !isFormValid">
+              <span class="ceb-icon">⚠️</span>
+              <span>Please fix <strong>{{ errorCount }} field{{ errorCount > 1 ? 's' : '' }}</strong> before sending.</span>
+            </div>
+  
+            <div class="cf-row">
+              <div class="cf-group" [class.has-error]="show('firstName')">
+                <label>First Name <span class="req">*</span></label>
+                <input type="text" [(ngModel)]="form.firstName" name="firstName" placeholder="John">
+                <div class="cf-error" *ngIf="show('firstName')">First name is required</div>
+              </div>
+              <div class="cf-group" [class.has-error]="show('lastName')">
+                <label>Last Name <span class="req">*</span></label>
+                <input type="text" [(ngModel)]="form.lastName" name="lastName" placeholder="Doe">
+                <div class="cf-error" *ngIf="show('lastName')">Last name is required</div>
+              </div>
+            </div>
+  
+            <div class="cf-group" [class.has-error]="show('email')">
+              <label>Email Address <span class="req">*</span></label>
+              <input type="email" [(ngModel)]="form.email" name="email" placeholder="john@company.com">
+              <div class="cf-error" *ngIf="show('email') && !form.email.trim()">Email address is required</div>
+              <div class="cf-error" *ngIf="show('emailFormat') || (formSubmitted && form.email.trim() && !isValidEmail(form.email))">Please enter a valid email address</div>
+            </div>
+  
+            <div class="cf-group" [class.has-error]="show('phone')">
+              <label>Phone / WhatsApp <span class="req">*</span></label>
+              <input type="tel" [(ngModel)]="form.phone" name="phone" placeholder="+234 800 000 0000">
+              <div class="cf-error" *ngIf="show('phone')">Please enter a valid phone number</div>
+            </div>
+  
+            <div class="cf-row">
+              <div class="cf-group" [class.has-error]="show('service')">
+                <label>Service Needed <span class="req">*</span></label>
+                <select [(ngModel)]="form.service" name="service">
+                  <option value="">Select service...</option>
+                  <option *ngFor="let s of services">{{ s }}</option>
+                </select>
+                <div class="cf-error" *ngIf="show('service')">Please select a service</div>
+              </div>
+              <div class="cf-group">
+                <label>Budget Range <span class="opt">(optional)</span></label>
+                <select [(ngModel)]="form.budget" name="budget">
+                  <option value="">Select budget...</option>
+                  <option *ngFor="let b of budgets">{{ b }}</option>
+                </select>
+              </div>
+            </div>
+  
+            <div class="cf-group" [class.has-error]="show('message')">
+              <label>Project Details <span class="req">*</span></label>
+              <textarea [(ngModel)]="form.message" name="message"
+                placeholder="Tell us about your project, goals, timeline and anything else we should know...">
+              </textarea>
+              <div class="cf-error" *ngIf="show('message')">Please add at least a brief description (10+ characters)</div>
+              <div class="cf-char-count" [class.warn]="form.message.length > 0 && form.message.length < 10">
+                {{ form.message.length }} characters{{ form.message.length < 10 && form.message.length > 0 ? ' — needs ' + (10 - form.message.length) + ' more' : '' }}
+              </div>
+            </div>
+  
+            <div class="cf-footer">
+              <p class="cf-privacy">🔒 Your info is safe. We never share or sell your data.</p>
+              <button class="btn-send btn-primary"
+                [class.btn-disabled]="formSubmitted && !isFormValid"
+                (click)="submit()">
+                Send Message 🚀
+              </button>
+            </div>
+  
+          </div>
+  
+          <!-- Success state -->
+          <div class="success-state" *ngIf="submitted">
+            <div class="success-ring">
+              <div class="success-icon">✓</div>
+            </div>
+            <h3>Message Sent!</h3>
+            <p>Thank you! We'll get back to you within 24 hours.<br>For a faster reply, WhatsApp us directly.</p>
+            <a href="https://wa.me/2349021706710" class="btn-primary" style="margin-top:24px;display:inline-flex">
+              💬 Open WhatsApp
+            </a>
+            <div class="success-meta">
+              <span>✓ Sent successfully</span>
+              <span>✓ Confirmation coming</span>
+            </div>
+          </div>
+  
+        </div>
+  
+        <!-- Below form card -->
+        <div class="form-footnote">
+          <span>⚡ Average response time: <strong>2–4 hours</strong></span>
+          <span>· 100% free consultation</span>
+        </div>
+      </div>
+  
+    </div>
+  </section>
+  
+  
+  <!-- FAQ ROW -->
+  <section class="section-pad ct-faq-section">
+    <div class="ct-faq-inner">
+      <div class="ct-faq-head" #reveal>
+        <div class="eyebrow">FAQ</div>
+        <h2 class="section-heading">Quick <span>Answers</span></h2>
+      </div>
+      <div class="ct-faq-grid">
+        <div class="ct-faq-item glass-card" *ngFor="let f of faqs" #reveal>
+          <div class="fq-icon">{{ f.icon }}</div>
+          <div>
+            <div class="fq-q">{{ f.q }}</div>
+            <div class="fq-a">{{ f.a }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  <!-- BOTTOM CTA -->
+  <section class="ct-bottom-cta">
+    <div class="ct-orb ct-orb-1" style="opacity:0.35"></div>
+    <div class="ct-orb ct-orb-2" style="opacity:0.2"></div>
+    <div class="ct-hero-bg"></div>
+    <div class="ct-cta-inner" #reveal>
+      <h2>Prefer to Chat<br><span>on WhatsApp?</span></h2>
+      <p>We're available on WhatsApp during business hours. Send us a voice note, photo reference or just say hello.</p>
+      <a href="https://wa.me/2349021706710" class="btn-wa">
+        <span>💬</span> Chat on WhatsApp
+      </a>
+      <div class="ct-wa-note">+234 810 357 6104 · Mon–Fri 9AM–6PM WAT</div>
+    </div>
+  </section>
