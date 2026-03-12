@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AboutComponent } from './pages/about/about.component';
 import { ServicesComponent } from './pages/services/services.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ContactComponent } from './pages/contact/contact.component';
     AboutComponent,
     ServicesComponent,
     ContactComponent,
+    PortfolioComponent,
     
   ],
   imports: [
