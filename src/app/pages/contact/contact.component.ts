@@ -21,7 +21,7 @@ export class ContactComponent implements AfterViewInit {
   };
  
   services = [
-    'Website Development', 'Mobile App Development',
+    'Website Development', 'Mobile App Development', 'EduTech',
     'E-Commerce Store', 'UI/UX Design',
     'SEO & Digital Marketing', 'Website Maintenance', 'Other'
   ];
