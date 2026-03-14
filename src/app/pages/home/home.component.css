@@ -162,7 +162,7 @@
      opacity: 0; animation: fadeUp 0.7s 0.5s ease forwards;
    }
    .hs-pill {
-     display: flex; align-items: center; gap: 9px;
+     display: flex; align-items: center; gap: 9px;justify-content: center;
      background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.28);
      backdrop-filter: blur(8px); border-radius: 14px; padding: 10px 16px;
      transition: background 0.2s, transform 0.2s; cursor: default;
@@ -295,7 +295,7 @@
      background: radial-gradient(circle, rgba(107,191,115,0.09), transparent 70%);
      bottom: -80px; left: -60px; pointer-events: none;
    }
-   .service-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+   .service-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
    .service-card {
      background: var(--white); padding: 38px 28px 32px; border-radius: 22px;
      border: 1px solid var(--border); box-shadow: var(--card-shadow);
