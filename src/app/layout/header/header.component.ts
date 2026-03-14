@@ -13,6 +13,19 @@ export class HeaderComponent {
   // Toggle mobile menu
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+    
+    
+    if (this.isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }
+
+  // Close mobile menu
+  closeMenu() {
+    this.isMenuOpen = false;
+    document.body.style.overflow = '';
   }
 
 }
