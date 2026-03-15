@@ -162,7 +162,7 @@
      opacity: 0; animation: fadeUp 0.7s 0.5s ease forwards;
    }
    .hs-pill {
-     display: flex; align-items: center; gap: 9px;justify-content: center;
+     display: flex; align-items: center; gap: 9px;
      background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.28);
      backdrop-filter: blur(8px); border-radius: 14px; padding: 10px 16px;
      transition: background 0.2s, transform 0.2s; cursor: default;
@@ -295,7 +295,7 @@
      background: radial-gradient(circle, rgba(107,191,115,0.09), transparent 70%);
      bottom: -80px; left: -60px; pointer-events: none;
    }
-   .service-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+   .service-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
    .service-card {
      background: var(--white); padding: 38px 28px 32px; border-radius: 22px;
      border: 1px solid var(--border); box-shadow: var(--card-shadow);
@@ -332,11 +332,11 @@
      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
    }
    .why-right { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-   .stat-card { background: var(--off-white); border-radius: 20px; padding: 28px 24px; border: 1px solid var(--border); transition: transform 0.3s, box-shadow 0.3s; }
+   .stat-card { background: var(--white); border-radius: 20px; padding: 28px 24px; border: 1px solid rgba(59,27,77,0.15); box-shadow: 0 4px 20px rgba(59,27,77,0.08); transition: transform 0.3s, box-shadow 0.3s; }
    .stat-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(59,27,77,0.09); }
    .stat-card.accent { background: var(--grad-brand); border-color: transparent; grid-row: span 2; display: flex; flex-direction: column; justify-content: space-between; }
    .stat-card.accent .sc-label { color: rgba(255,255,255,0.65); }
-   .sc-num { font-family: var(--font-head); font-size: 2.5rem; font-weight: 800; line-height: 1; background: var(--grad-brand); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+   .sc-num { font-family: var(--font-head); font-size: 2.5rem; font-weight: 800; line-height: 1; color: var(--purple-mid); }
    .stat-card.accent .sc-num { background: linear-gradient(135deg, #fff, #c8f0cc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
    .sc-label { font-size: 0.82rem; color: var(--muted); margin-top: 6px; }
    .why-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
