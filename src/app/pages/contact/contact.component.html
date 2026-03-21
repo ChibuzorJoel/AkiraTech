@@ -141,21 +141,27 @@
       <!-- RIGHT: Form -->
       <div class="contact-form-wrap" #reveal>
         <div class="contact-form glass-card">
-  
+      
           <!-- Form state -->
           <div *ngIf="!submitted">
-  
+      
             <div class="cf-head">
               <h3>Send Us a Message</h3>
               <p>Fill in the details below and we'll get back to you shortly.</p>
             </div>
-  
-            <!-- Validation summary banner -->
+      
+            <!-- Error banner for validation -->
             <div class="cf-error-banner" *ngIf="formSubmitted && !isFormValid">
               <span class="ceb-icon">⚠️</span>
               <span>Please fix <strong>{{ errorCount }} field{{ errorCount > 1 ? 's' : '' }}</strong> before sending.</span>
             </div>
-  
+      
+            <!-- Error banner for submission failure -->
+            <div class="cf-error-banner" *ngIf="submitError" style="background: rgba(255,0,0,0.1); border-color: rgba(255,0,0,0.3);">
+              <span class="ceb-icon">❌</span>
+              <span>{{ errorMessage }}</span>
+            </div>
+      
             <div class="cf-row">
               <div class="cf-group" [class.has-error]="show('firstName')">
                 <label>First Name <span class="req">*</span></label>
@@ -168,20 +174,20 @@
                 <div class="cf-error" *ngIf="show('lastName')">Last name is required</div>
               </div>
             </div>
-  
+      
             <div class="cf-group" [class.has-error]="show('email')">
               <label>Email Address <span class="req">*</span></label>
               <input type="email" [(ngModel)]="form.email" name="email" placeholder="john@company.com">
               <div class="cf-error" *ngIf="show('email') && !form.email.trim()">Email address is required</div>
               <div class="cf-error" *ngIf="show('emailFormat') || (formSubmitted && form.email.trim() && !isValidEmail(form.email))">Please enter a valid email address</div>
             </div>
-  
+      
             <div class="cf-group" [class.has-error]="show('phone')">
               <label>Phone / WhatsApp <span class="req">*</span></label>
               <input type="tel" [(ngModel)]="form.phone" name="phone" placeholder="+234 800 000 0000">
               <div class="cf-error" *ngIf="show('phone')">Please enter a valid phone number</div>
             </div>
-  
+      
             <div class="cf-row">
               <div class="cf-group" [class.has-error]="show('service')">
                 <label>Service Needed <span class="req">*</span></label>
@@ -199,7 +205,7 @@
                 </select>
               </div>
             </div>
-  
+      
             <div class="cf-group" [class.has-error]="show('message')">
               <label>Project Details <span class="req">*</span></label>
               <textarea [(ngModel)]="form.message" name="message"
@@ -210,18 +216,20 @@
                 {{ form.message.length }} characters{{ form.message.length < 10 && form.message.length > 0 ? ' — needs ' + (10 - form.message.length) + ' more' : '' }}
               </div>
             </div>
-  
+      
             <div class="cf-footer">
               <p class="cf-privacy">🔒 Your info is safe. We never share or sell your data.</p>
               <button class="btn-send btn-primary"
                 [class.btn-disabled]="formSubmitted && !isFormValid"
+                [disabled]="submitting"
                 (click)="submit()">
-                Send Message 🚀
+                <span *ngIf="!submitting">Send Message 🚀</span>
+                <span *ngIf="submitting">Sending... ⏳</span>
               </button>
             </div>
-  
+      
           </div>
-  
+      
           <!-- Success state -->
           <div class="success-state" *ngIf="submitted">
             <div class="success-ring">
@@ -237,9 +245,9 @@
               <span>✓ Confirmation coming</span>
             </div>
           </div>
-  
+      
         </div>
-  
+      
         <!-- Below form card -->
         <div class="form-footnote">
           <span>⚡ Average response time: <strong>2–4 hours</strong></span>

@@ -373,3 +373,32 @@
     .contact-form { padding: 24px 20px; }
     .ct-trust-row { flex-direction: column; gap: 10px; }
   }
+
+  /* Error banner */
+.cf-error-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 0, 0, 0.08);
+  border: 1px solid rgba(255, 0, 0, 0.25);
+  border-radius: 12px;
+  padding: 12px 18px;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  color: #ff6b6b;
+}
+
+.cf-error-banner .ceb-icon {
+  font-size: 1.1rem;
+}
+
+.cf-error-banner strong {
+  color: #ff8a8a;
+  font-weight: 700;
+}
+
+.btn-send:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}

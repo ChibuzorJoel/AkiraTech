@@ -412,3 +412,80 @@
      .hero-services { flex-direction: column; align-items: center; }
      .cb-inner    { flex-direction: column; align-items: center; text-align: center; }
    }
+
+   /* ── VIDEO BACKGROUND ─────────────────────────────────────── */
+   .hero {
+     position: relative;
+     overflow: hidden;
+     background: none; /* Remove the gradient background */
+     animation: none; /* Remove animation since we're using video */
+   }
+   
+   /* Remove the hero background gradient when video is present */
+   .hero {
+     background: #000; /* Fallback color */
+   }
+   
+   .hero-video-background {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     object-fit:cover;
+     z-index: 1;
+     pointer-events: none;
+   }
+   
+   /* Dark overlay for better text readability */
+   .hero-video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    z-index: 1;
+    pointer-events: none;
+  }
+   
+   /* Ensure all content appears above the video and overlay */
+   .hero-container {
+     position: relative;
+     z-index: 1;
+   }
+   
+   /* Adjust orb opacity and positioning for video background */
+   .hero-orb {
+    
+     z-index: 1;
+     
+   }
+   
+   /* Keep the hero ::before element but make it more subtle */
+   .hero::before {
+     content: '';
+     position: absolute;
+     inset: 0;
+     background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1.5px, transparent 1.5px);
+     background-size: 26px 26px;
+     pointer-events: none;
+     z-index: 1;
+   }
+   
+   /* Video fallback for mobile devices that don't support video */
+   @media (max-width: 400px) {
+     .hero-video-background {
+       display: none;
+     }
+     
+     .hero {
+       background: var(--grad-brand);
+       background-size: 300% 300%;
+       animation: heroShift 16s ease infinite;
+     }
+     
+     .hero-video-overlay {
+       display: none;
+     }
+   }

@@ -1,7 +1,5 @@
-import { Component, AfterViewInit, ElementRef, QueryList, ViewChildren, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Component, AfterViewInit, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { HttpClient } from '@angular/common/http'; 
 
 @Component({
   selector: 'app-contact',
@@ -12,7 +10,10 @@ export class ContactComponent implements AfterViewInit {
   @ViewChildren('reveal') reveals!: QueryList<ElementRef>;
  
   submitted = false;
-  formSubmitted = false; // tracks if user clicked submit (triggers validation display)
+  formSubmitted = false;
+  submitting = false;
+  submitError = false; 
+  errorMessage = '';
  
   form = {
     firstName: '', lastName: '',
@@ -39,6 +40,9 @@ export class ContactComponent implements AfterViewInit {
     { icon: '💳', q: 'What payment methods do you accept?', a: 'Paystack, bank transfer and Flutterwave. Instalments available for larger projects.' },
     { icon: '🔒', q: 'Is my project idea confidential?',   a: 'Completely. We treat every enquiry with full discretion and never share your ideas.' },
   ];
+ 
+  
+  constructor(private http: HttpClient) {}
  
   // ── Validation helpers ──────────────────────────────────
   isValidEmail(email: string): boolean {
@@ -78,12 +82,66 @@ export class ContactComponent implements AfterViewInit {
   submit() {
     this.formSubmitted = true;
     if (!this.isFormValid) return;
-    this.submitted = true;
-    setTimeout(() => {
-      this.submitted = false;
-      this.formSubmitted = false;
-      this.form = { firstName:'', lastName:'', email:'', phone:'', service:'', budget:'', message:'' };
-    }, 6000);
+    
+    this.submitting = true;
+    this.submitError = false;
+    
+    
+    const formData = {
+      firstName: this.form.firstName,
+      lastName: this.form.lastName,
+      email: this.form.email,
+      phone: this.form.phone,
+      service: this.form.service,
+      budget: this.form.budget || 'Not specified',
+      message: this.form.message,
+      submittedAt: new Date().toISOString(),
+      source: 'Akiira Tech Contact Form'
+    };
+    
+  
+    const formspreeUrl = 'https://formspree.io/f/maqpkrky';
+    
+    this.http.post(formspreeUrl, formData, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .subscribe({
+      next: (response) => {
+        console.log('Form submitted successfully:', response);
+        this.submitted = true;
+        this.submitting = false;
+        
+        // Reset form after success
+        setTimeout(() => {
+          this.submitted = false;
+          this.formSubmitted = false;
+          this.resetForm();
+        }, 6000);
+      },
+      error: (error) => {
+        console.error('Error submitting form:', error);
+        this.submitting = false;
+        this.submitError = true;
+        this.errorMessage = 'Something went wrong. Please try again or contact us directly via WhatsApp.';
+        
+        // Hide error after 5 seconds
+        setTimeout(() => {
+          this.submitError = false;
+          this.errorMessage = '';
+        }, 5000);
+      }
+    });
+  }
+  
+  resetForm() {
+    this.form = {
+      firstName: '', lastName: '',
+      email: '', phone: '',
+      service: '', budget: '', message: ''
+    };
   }
  
   ngAfterViewInit() {
