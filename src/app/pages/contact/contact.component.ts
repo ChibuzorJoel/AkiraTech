@@ -100,7 +100,7 @@ export class ContactComponent implements AfterViewInit {
     };
     
   
-    const formspreeUrl = 'https://formspree.io/f/maqpkrky';
+    const formspreeUrl = 'https://formspree.io/f/xkoqavqq';
     
     this.http.post(formspreeUrl, formData, {
       headers: {
