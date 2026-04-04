@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class ContactComponent implements AfterViewInit {
   @ViewChildren('reveal') reveals!: QueryList<ElementRef>;
  
+  // Contact form variables
   submitted = false;
   formSubmitted = false;
   submitting = false;
@@ -19,6 +20,20 @@ export class ContactComponent implements AfterViewInit {
     firstName: '', lastName: '',
     email: '', phone: '',
     service: '', budget: '', message: ''
+  };
+ 
+  // Registration form variables
+  showRegisterForm = false;
+  registerSubmitted = false;
+  registerFormSubmitted = false;
+  registerSubmitting = false;
+  
+  registerForm = {
+    fullName: '',
+    email: '',
+    phone: '',
+    source: '',
+    message: ''
   };
  
   services = [
@@ -43,6 +58,71 @@ export class ContactComponent implements AfterViewInit {
  
   
   constructor(private http: HttpClient) {}
+
+  
+  openRegisterForm() {
+    this.showRegisterForm = true;
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+  }
+
+  closeRegisterForm() {
+    this.showRegisterForm = false;
+    this.registerSubmitted = false;
+    this.registerFormSubmitted = false;
+    this.registerForm = {
+      fullName: '',
+      email: '',
+      phone: '',
+      source: '',
+      message: ''
+    };
+    document.body.style.overflow = ''; // Restore scrolling
+  }
+
+  get isRegisterFormValid(): boolean {
+    return this.registerForm.fullName.trim() !== '' &&
+           this.registerForm.email.trim() !== '' &&
+           this.isValidEmail(this.registerForm.email) &&
+           this.registerForm.phone.trim() !== '';
+           
+  }
+
+  submitRegistration() {
+    this.registerFormSubmitted = true;
+    if (!this.isRegisterFormValid) return;
+    
+    this.registerSubmitting = true;
+    
+    const formData = {
+      fullName: this.registerForm.fullName,
+      email: this.registerForm.email,
+      phone: this.registerForm.phone,
+      source: this.registerForm.source || 'Not specified',
+      message: this.registerForm.message || 'No message provided',
+      submittedAt: new Date().toISOString(),
+      sourcePage: 'Registration Form - Contact Page'
+    };
+    
+    
+    const formspreeUrl = 'https://formspree.io/f/xjgppopv';
+    
+    this.http.post(formspreeUrl, formData, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .subscribe({
+      next: () => {
+        this.registerSubmitting = false;
+        this.registerSubmitted = true;
+      },
+      error: () => {
+        this.registerSubmitting = false;
+        alert('Registration failed. Please try again or contact us directly.');
+      }
+    });
+  }
  
   // ── Validation helpers ──────────────────────────────────
   isValidEmail(email: string): boolean {
@@ -86,7 +166,6 @@ export class ContactComponent implements AfterViewInit {
     this.submitting = true;
     this.submitError = false;
     
-    
     const formData = {
       firstName: this.form.firstName,
       lastName: this.form.lastName,
@@ -99,7 +178,6 @@ export class ContactComponent implements AfterViewInit {
       source: 'Akiira Tech Contact Form'
     };
     
-  
     const formspreeUrl = 'https://formspree.io/f/xkoqavqq';
     
     this.http.post(formspreeUrl, formData, {
@@ -114,7 +192,6 @@ export class ContactComponent implements AfterViewInit {
         this.submitted = true;
         this.submitting = false;
         
-        // Reset form after success
         setTimeout(() => {
           this.submitted = false;
           this.formSubmitted = false;
@@ -127,7 +204,6 @@ export class ContactComponent implements AfterViewInit {
         this.submitError = true;
         this.errorMessage = 'Something went wrong. Please try again or contact us directly via WhatsApp.';
         
-        // Hide error after 5 seconds
         setTimeout(() => {
           this.submitError = false;
           this.errorMessage = '';
