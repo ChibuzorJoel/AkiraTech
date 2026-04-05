@@ -1,0 +1,234 @@
+<!-- ══════════════════════════════════════════════════════════
+REGISTRATION PAGE — Akiira Tech
+══════════════════════════════════════════════════════════ -->
+
+<div class="register-page">
+  <!-- HERO SECTION -->
+  <section class="register-hero">
+    <div class="register-hero-bg"></div>
+    <div class="register-orb register-orb-1"></div>
+    <div class="register-orb register-orb-2"></div>
+    <div class="register-orb register-orb-3"></div>
+
+    <div class="register-hero-inner">
+      <div class="eyebrow">Start Your Journey</div>
+      <h1>Register for <span>Tech Training</span></h1>
+      <p>Gain in-demand tech skills and kickstart your career with Akiira Tech</p>
+
+      <div class="register-benefits">
+        <div class="benefit-item">
+          <span class="benefit-icon">🎓</span>
+          <span>Expert Instructors</span>
+        </div>
+        <div class="benefit-sep"></div>
+        <div class="benefit-item">
+          <span class="benefit-icon">💻</span>
+          <span>Hands-on Projects</span>
+        </div>
+        <div class="benefit-sep"></div>
+        <div class="benefit-item">
+          <span class="benefit-icon">🏆</span>
+          <span>Certificate of Completion</span>
+        </div>
+        <div class="benefit-sep"></div>
+        <div class="benefit-item">
+          <span class="benefit-icon">🤝</span>
+          <span>Career Support</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- REGISTRATION FORM SECTION -->
+  <section class="register-form-section">
+    <div class="register-form-container">
+
+      <!-- Success State -->
+      <div class="register-success-card glass-card" *ngIf="submitted">
+        <div class="success-icon-circle">
+          <div class="success-check">✓</div>
+        </div>
+        <h2>Registration Successful!</h2>
+        <p>Thank you for registering with Akiira Tech!</p>
+        <p>We've received your information and will contact you within <strong>24 hours</strong> with course details, payment information, and next steps.</p>
+        <div class="success-actions">
+          <a routerLink="/" class="btn-primary">🏠 Back to Home</a>
+          <a href="https://wa.me/2349021706710" class="btn-outline">💬 Message on WhatsApp</a>
+        </div>
+        <div class="success-note">
+          <span>✓ Check your email/spam folder</span>
+          <span>✓ Add akiiratech@gmail.com to contacts</span>
+        </div>
+      </div>
+
+      <!-- Form State -->
+      <div class="register-form-card glass-card" *ngIf="!submitted">
+        <div class="form-header">
+          <div class="form-icon">📝</div>
+          <h2>Register Now</h2>
+          <p>Fill in the details below to secure your spot</p>
+        </div>
+
+        <!-- Error banner -->
+        <div class="register-error-banner" *ngIf="submitError">
+          <span class="error-icon">❌</span>
+          <span>{{ errorMessage }}</span>
+        </div>
+
+        <div class="form-group">
+          <label>Full Name <span class="required">*</span></label>
+          <input 
+            type="text" 
+            [(ngModel)]="registerForm.fullName" 
+            placeholder="Enter your full name"
+            [class.error]="showError('fullName')">
+          <div class="error-message" *ngIf="showError('fullName')">Full name is required</div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email Address <span class="required">*</span></label>
+            <input 
+              type="email" 
+              [(ngModel)]="registerForm.email" 
+              placeholder="you@example.com"
+              [class.error]="showError('email')">
+            <div class="error-message" *ngIf="showError('email')">
+              <span *ngIf="!registerForm.email.trim()">Email address is required</span>
+              <span *ngIf="registerForm.email.trim() && !isValidEmail(registerForm.email)">Please enter a valid email address</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Phone Number <span class="required">*</span></label>
+            <input 
+              type="tel" 
+              [(ngModel)]="registerForm.phone" 
+              placeholder="+234 800 000 0000"
+              [class.error]="showError('phone')">
+            <div class="error-message" *ngIf="showError('phone')">Valid phone number is required</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Select Course <span class="required">*</span></label>
+          <select [(ngModel)]="registerForm.course" [class.error]="showError('course')">
+            <option value="">Choose a course...</option>
+            <option *ngFor="let course of courses" [value]="course">{{ course }}</option>
+          </select>
+          <div class="error-message" *ngIf="showError('course')">Please select a course</div>
+        </div>
+
+        <div class="form-group">
+          <label>How did you hear about us?</label>
+          <select [(ngModel)]="registerForm.source">
+            <option value="">Select an option...</option>
+            <option *ngFor="let source of sources" [value]="source">{{ source }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Message / Questions (Optional)</label>
+          <textarea 
+            [(ngModel)]="registerForm.message" 
+            placeholder="Tell us about your goals, experience level, or any questions you have..."
+            rows="4"></textarea>
+        </div>
+
+        <div class="form-footer">
+          <p class="privacy-note">🔒 Your information is secure. We never share your data.</p>
+          <button 
+            class="submit-btn" 
+            (click)="submit()"
+            [disabled]="submitting">
+            <span *ngIf="!submitting">🚀 Register Now</span>
+            <span *ngIf="submitting">⏳ Submitting...</span>
+          </button>
+        </div>
+
+        <div class="form-footnote">
+          <span>⚡ Early bird discounts available</span>
+          <span>🎓 Flexible payment plans</span>
+          <span>📅 Classes start monthly</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="register-faq">
+    <div class="container">
+      <div class="section-eyebrow" style="justify-content:center; display:flex">
+        <span class="eyebrow-dot"></span>Common Questions
+      </div>
+      <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+
+      <div class="faq-grid">
+        <div class="faq-item glass-card">
+          <div class="faq-icon">⏰</div>
+          <div class="faq-content">
+            <h4>How long are the courses?</h4>
+            <p>Our courses range from 8-16 weeks depending on the program. Each course includes live sessions, practical projects, and mentorship.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item glass-card">
+          <div class="faq-icon">💻</div>
+          <div class="faq-content">
+            <h4>Are classes online or physical?</h4>
+            <p>We offer both options! Choose between fully online (live interactive classes) or in-person at our Lagos training center.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item glass-card">
+          <div class="faq-icon">💰</div>
+          <div class="faq-content">
+            <h4>What are the payment options?</h4>
+            <p>We accept bank transfers, Paystack, and offer flexible instalment plans. Contact us for scholarship opportunities.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item glass-card">
+          <div class="faq-icon">🎓</div>
+          <div class="faq-content">
+            <h4>Will I get a certificate?</h4>
+            <p>Yes! All students receive a certificate of completion and can access career support including resume review and job placement assistance.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item glass-card">
+          <div class="faq-icon">⚙️</div>
+          <div class="faq-content">
+            <h4>What are the requirements?</h4>
+            <p>Basic computer literacy and a strong desire to learn. No prior coding experience is needed for beginner courses.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item glass-card">
+          <div class="faq-icon">📅</div>
+          <div class="faq-content">
+            <h4>When does the next batch start?</h4>
+            <p>New batches start every month. Register now and our team will contact you with upcoming dates.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="register-cta">
+    <div class="register-cta-inner">
+      <h2>Have Questions Before<br><span>Registering?</span></h2>
+      <p>Chat with our admissions team directly on WhatsApp for instant answers.</p>
+      <a href="https://wa.me/2349021706710" class="cta-wa-btn">
+        <span>💬</span> Chat on WhatsApp
+      </a>
+      <div class="cta-note">Response within 2-4 hours</div>
+    </div>
+  </section>
+</div>

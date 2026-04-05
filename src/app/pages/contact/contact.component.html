@@ -4,90 +4,11 @@ CONTACT PAGE — Akiira Tech
 
 <!-- Register Button-->
 <div class="register-button-container">
-<button class="register-main-btn" (click)="openRegisterForm()">
+<button class="register-main-btn" routerLink="/register">
 🎓 Register Here
 </button>
 </div>
 
-<!-- Registration Form Overlay -->
-<div class="register-overlay" *ngIf="showRegisterForm" (click)="closeRegisterForm()">
-<div class="register-modal glass-card" (click)="$event.stopPropagation()">
-<button class="register-close-btn" (click)="closeRegisterForm()">✕</button>
-
-<div class="register-header">
- <div class="register-icon">🎓</div>
- <h2>Register for <span>Tech Training</span></h2>
- <p>Start your journey into tech with Akiira Tech</p>
-</div>
-
-<!-- Form State -->
-<div *ngIf="!registerSubmitted">
- <div class="register-form-group">
-   <label>Full Name *</label>
-   <input type="text" [(ngModel)]="registerForm.fullName" placeholder="Enter your full name">
-   <div class="register-error" *ngIf="registerFormSubmitted && !registerForm.fullName.trim()">
-     Full name is required
-   </div>
- </div>
-
- <div class="register-form-group">
-   <label>Email Address *</label>
-   <input type="email" [(ngModel)]="registerForm.email" placeholder="you@example.com">
-   <div class="register-error" *ngIf="registerFormSubmitted && !registerForm.email.trim()">
-     Email address is required
-   </div>
-   <div class="register-error" *ngIf="registerFormSubmitted && registerForm.email.trim() && !isValidEmail(registerForm.email)">
-     Please enter a valid email address
-   </div>
- </div>
-
- <div class="register-form-group">
-   <label>Phone Number *</label>
-   <input type="tel" [(ngModel)]="registerForm.phone" placeholder="+234 800 000 0000">
-   <div class="register-error" *ngIf="registerFormSubmitted && !registerForm.phone.trim()">
-     Phone number is required
-   </div>
- </div>
-
- 
-
- <div class="register-form-group">
-   <label>How did you hear about us?</label>
-   <select [(ngModel)]="registerForm.source">
-     <option value="">Select an option...</option>
-     <option value="Google">Google Search</option>
-     <option value="Instagram">Instagram</option>
-     <option value="Twitter/X">Twitter/X</option>
-     <option value="LinkedIn">LinkedIn</option>
-     <option value="WhatsApp">WhatsApp</option>
-     <option value="Friend/Family">Friend/Family</option>
-     <option value="Other">Other</option>
-   </select>
- </div>
-
- <div class="register-form-group">
-   <label>Message (Optional)</label>
-   <textarea [(ngModel)]="registerForm.message" 
-     placeholder="Any specific questions or goals?"></textarea>
- </div>
-
- <button class="register-submit-btn" 
-         (click)="submitRegistration()"
-         [disabled]="registerSubmitting">
-   <span *ngIf="!registerSubmitting">🚀 Register Now</span>
-   <span *ngIf="registerSubmitting">Submitting...</span>
- </button>
-</div>
-
-<!-- Success State -->
-<div class="register-success" *ngIf="registerSubmitted">
- <div class="register-success-icon">✓</div>
- <h3>Registration Successful!</h3>
- <p>Thank you for registering! We'll contact you within 24 hours with course details and payment information.</p>
- <button class="register-close-success-btn" (click)="closeRegisterForm()">Close</button>
-</div>
-</div>
-</div>
 
 <!-- HERO -->
 <section class="ct-hero">

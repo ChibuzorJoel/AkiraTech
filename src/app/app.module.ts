@@ -12,6 +12,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { ServicesComponent } from './pages/services/services.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { PortfolioComponent } from './pages/portfolio/portfolio.component';
     ServicesComponent,
     ContactComponent,
     PortfolioComponent,
+    RegisterComponent,
     
   ],
   imports: [

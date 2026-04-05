@@ -378,7 +378,92 @@
    
    /* ── KEYFRAMES ──────────────────────────────────────────── */
    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-   
+   /* ── FLOATING REGISTER BUTTON ───────────────────────────────── */
+.floating-register-btn {
+  position: fixed;
+  top: 150px;
+  right: 30px;
+  background: linear-gradient(135deg, #6bbf73, #4d9e55);
+  color: white;
+  height: 40px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.9rem;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(107, 191, 115, 0.3);
+  transition: all 0.3s ease;
+  animation: pulseRegister 2s infinite;
+}
+
+.floating-register-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(107, 191, 115, 0.5);
+  background: linear-gradient(135deg, #7dd085, #5db568);
+}
+
+.register-icon {
+  font-size: 1.2rem;
+}
+
+.register-text {
+  letter-spacing: 0.5px;
+}
+
+@keyframes pulseRegister {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(107, 191, 115, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(107, 191, 115, 0.6);
+  }
+}
+
+/* Adjust position on mobile to avoid overlapping with WhatsApp if you have one */
+@media (max-width: 768px) {
+  .floating-register-btn {
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 18px;
+    font-size: 0.8rem;
+  }
+  
+  .register-icon {
+    font-size: 1rem;
+  }
+}
+
+/* If you have a WhatsApp button, adjust register button position */
+@media (max-width: 768px) {
+  /* If WhatsApp button is at bottom-left, keep register at bottom-right */
+  .floating-register-btn {
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+/* Optional: Add a subtle glow effect on hover */
+.floating-register-btn::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #6bbf73, #4d9e55);
+  border-radius: 50px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.floating-register-btn:hover::before {
+  opacity: 0.5;
+  filter: blur(5px);
+}
    /* ── RESPONSIVE ─────────────────────────────────────────── */
    @media (max-width: 1024px) {
      .service-grid { grid-template-columns: repeat(2, 1fr); }
@@ -472,6 +557,95 @@
      pointer-events: none;
      z-index: 1;
    }
+
+   /* ── FLOATING REGISTER BUTTON ───────────────────────────────── */
+.floating-register-btn {
+  position: fixed;
+  top: 150px;
+  right: 30px;
+  height: 40px;
+  background: linear-gradient(135deg, #6bbf73, #4d9e55);
+  color: white;
+  padding: 14px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.9rem;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(107, 191, 115, 0.3);
+  transition: all 0.3s ease;
+  animation: pulseRegister 2s infinite;
+}
+
+.floating-register-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(107, 191, 115, 0.5);
+  background: linear-gradient(135deg, #7dd085, #5db568);
+}
+
+.register-icon {
+  font-size: 1.2rem;
+}
+
+.register-text {
+  letter-spacing: 0.5px;
+}
+
+@keyframes pulseRegister {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(107, 191, 115, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(107, 191, 115, 0.6);
+  }
+}
+
+/* Adjust position on mobile to avoid overlapping with WhatsApp if you have one */
+@media (max-width: 768px) {
+  .floating-register-btn {
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 18px;
+    font-size: 0.8rem;
+  }
+  
+  .register-icon {
+    font-size: 1rem;
+  }
+}
+
+
+@media (max-width: 768px) {
+  /* If WhatsApp button is at bottom-left, keep register at bottom-right */
+  .floating-register-btn {
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+/* Optional: Add a subtle glow effect on hover */
+.floating-register-btn::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #6bbf73, #4d9e55);
+  border-radius: 50px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.floating-register-btn:hover::before {
+  opacity: 0.5;
+  filter: blur(5px);
+}
    
    /* Video fallback for mobile devices that don't support video */
    @media (max-width: 300px) {
