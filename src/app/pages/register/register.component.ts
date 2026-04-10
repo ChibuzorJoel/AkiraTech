@@ -14,6 +14,11 @@ export class RegisterComponent {
   submitError = false;
   errorMessage = '';
 
+  // Terms and conditions
+  agreeToTerms = false;
+  showTermsModal = false;
+  showPrivacyModal = false;
+
   registerForm = {
     fullName: '',
     email: '',
@@ -52,7 +57,8 @@ export class RegisterComponent {
            this.registerForm.email.trim() !== '' &&
            this.isValidEmail(this.registerForm.email) &&
            this.registerForm.phone.trim() !== '' &&
-           this.registerForm.course !== '';
+           this.registerForm.course !== '' &&
+           this.agreeToTerms === true; // Terms validation added
   }
 
   isValidEmail(email: string): boolean {
@@ -75,9 +81,35 @@ export class RegisterComponent {
         return !this.registerForm.phone.trim() || !this.isValidPhone(this.registerForm.phone);
       case 'course':
         return !this.registerForm.course;
+      case 'terms':
+        return !this.agreeToTerms;
       default:
         return false;
     }
+  }
+
+  // Modal methods
+  openTermsModal(event: Event) {
+    event.preventDefault();
+    this.showTermsModal = true;
+    document.body.style.overflow = 'hidden';
+  }
+
+  openPrivacyModal(event: Event) {
+    event.preventDefault();
+    this.showPrivacyModal = true;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeModal() {
+    this.showTermsModal = false;
+    this.showPrivacyModal = false;
+    document.body.style.overflow = '';
+  }
+
+  acceptTerms() {
+    this.agreeToTerms = true;
+    this.closeModal();
   }
 
   submit() {
@@ -94,6 +126,7 @@ export class RegisterComponent {
       course: this.registerForm.course,
       source: this.registerForm.source || 'Not specified',
       message: this.registerForm.message || 'No message provided',
+      agreedToTerms: this.agreeToTerms,
       submittedAt: new Date().toISOString(),
       page: 'Registration Page'
     };
@@ -143,6 +176,8 @@ export class RegisterComponent {
       source: '',
       message: ''
     };
+    this.agreeToTerms = false;
+    this.formSubmitted = false;
   }
 
   goBack() {

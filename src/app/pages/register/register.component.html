@@ -140,6 +140,21 @@ REGISTRATION PAGE — Akiira Tech
             rows="4"></textarea>
         </div>
 
+        <!-- Terms and Conditions Checkbox -->
+        <div class="form-group terms-group">
+          <label class="checkbox-label">
+            <input 
+              type="checkbox" 
+              [(ngModel)]="agreeToTerms" 
+              [class.error]="showError('terms')">
+            <span class="checkbox-text">
+              I agree to the <a href="#" (click)="openTermsModal($event)" class="terms-link">Terms and Conditions</a> and 
+              <a href="#" (click)="openPrivacyModal($event)" class="terms-link">Privacy Policy</a> <span class="required">*</span>
+            </span>
+          </label>
+          <div class="error-message" *ngIf="showError('terms')">You must agree to the Terms and Conditions to register</div>
+        </div>
+
         <div class="form-footer">
           <p class="privacy-note">🔒 Your information is secure. We never share your data.</p>
           <button 
@@ -231,4 +246,60 @@ REGISTRATION PAGE — Akiira Tech
       <div class="cta-note">Response within 2-4 hours</div>
     </div>
   </section>
+</div>
+
+<!-- Terms and Conditions Modal -->
+<div class="modal-overlay" *ngIf="showTermsModal" (click)="closeModal()">
+  <div class="modal-content glass-card" (click)="$event.stopPropagation()">
+    <button class="modal-close" (click)="closeModal()">✕</button>
+    <h2>Terms and Conditions</h2>
+    <div class="modal-body">
+      <h3>1. Acceptance of Terms</h3>
+      <p>By registering for any course offered by Akiira Tech, you agree to be bound by these Terms and Conditions.</p>
+      
+      <h3>2. Course Enrollment</h3>
+      <p>Enrollment is confirmed upon completion of registration and payment (if applicable). Akiira Tech reserves the right to cancel or reschedule courses with prior notice.</p>
+      
+      <h3>3. Payment Terms</h3>
+      <p>Course fees must be paid in full before course commencement unless a payment plan has been agreed upon. Refunds are available within 7 days of payment, subject to a 10% processing fee.</p>
+      
+      <h3>4. Code of Conduct</h3>
+      <p>Students are expected to maintain professional behavior during classes. Akiira Tech reserves the right to remove any student violating these terms without refund.</p>
+      
+      <h3>5. Intellectual Property</h3>
+      <p>All course materials, code examples, and resources provided are the intellectual property of Akiira Tech and may not be distributed without permission.</p>
+      
+      <h3>6. Certificate of Completion</h3>
+      <p>Certificates are awarded upon successful completion of course requirements, including attendance and project submission.</p>
+      
+      <h3>7. Limitation of Liability</h3>
+      <p>Akiira Tech is not liable for any indirect damages arising from course participation or use of provided materials.</p>
+    </div>
+    <button class="modal-agree" (click)="acceptTerms()">I Understand</button>
+  </div>
+</div>
+
+<!-- Privacy Policy Modal -->
+<div class="modal-overlay" *ngIf="showPrivacyModal" (click)="closeModal()">
+  <div class="modal-content glass-card" (click)="$event.stopPropagation()">
+    <button class="modal-close" (click)="closeModal()">✕</button>
+    <h2>Privacy Policy</h2>
+    <div class="modal-body">
+      <h3>Information We Collect</h3>
+      <p>We collect personal information including name, email, phone number, and course preferences when you register.</p>
+      
+      <h3>How We Use Your Information</h3>
+      <p>Your information is used to process your registration, communicate course updates, and improve our services. We do not sell your personal information to third parties.</p>
+      
+      <h3>Data Security</h3>
+      <p>We implement industry-standard security measures to protect your personal information from unauthorized access.</p>
+      
+      <h3>Your Rights</h3>
+      <p>You may request access to, correction of, or deletion of your personal data by contacting us at akiiratech@gmail.com.</p>
+      
+      <h3>Contact Us</h3>
+      <p>For privacy concerns, email us at akiiratech@gmail.com</p>
+    </div>
+    <button class="modal-agree" (click)="closeModal()">I Understand</button>
+  </div>
 </div>
