@@ -372,3 +372,351 @@ CTA
   <span class="register-icon">🎓</span>
   <span class="register-text">Register Now</span>
 </a>
+
+<!-- ══════════════════════════════════════════════════════════
+COOKIE CONSENT POPUP
+══════════════════════════════════════════════════════════ -->
+<div class="cookie-consent" *ngIf="showCookieConsent">
+  <div class="cookie-container">
+    <div class="cookie-icon">🍪</div>
+    <div class="cookie-content">
+      <h3>We Value Your Privacy</h3>
+      <p>We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept", you consent to our use of cookies.</p>
+      <div class="cookie-buttons">
+        <button class="cookie-accept" (click)="acceptCookies()">Accept All</button>
+        <button class="cookie-decline" (click)="declineCookies()">Decline</button>
+        <button class="cookie-settings" (click)="openCookieSettings()">Cookie Settings</button>
+      </div>
+      <p class="cookie-policy-link">For more information, read our <a href="#" (click)="openCookiePolicy($event)">Cookie Policy</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+COOKIE SETTINGS MODAL
+══════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" *ngIf="showCookieSettings" (click)="closeCookieSettings()">
+  <div class="modal-content glass-card" (click)="$event.stopPropagation()">
+    <button class="modal-close" (click)="closeCookieSettings()">✕</button>
+    <h2>Cookie Preferences</h2>
+    <div class="modal-body">
+      <p>Manage your cookie preferences below. Essential cookies cannot be disabled as they are necessary for the website to function properly.</p>
+      
+      <div class="cookie-option">
+        <div class="cookie-option-header">
+          <span class="cookie-option-name">Essential Cookies</span>
+          <span class="cookie-option-status always-on">Always On</span>
+        </div>
+        <p class="cookie-option-desc">These cookies are necessary for the website to function and cannot be switched off. They enable basic functions like page navigation and access to secure areas.</p>
+      </div>
+      
+      <div class="cookie-option">
+        <div class="cookie-option-header">
+          <span class="cookie-option-name">Analytics Cookies</span>
+          <label class="switch">
+            <input type="checkbox" [(ngModel)]="cookiePreferences.analytics">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="cookie-option-desc">These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously.</p>
+      </div>
+      
+      <div class="cookie-option">
+        <div class="cookie-option-header">
+          <span class="cookie-option-name">Functional Cookies</span>
+          <label class="switch">
+            <input type="checkbox" [(ngModel)]="cookiePreferences.functional">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="cookie-option-desc">These cookies enable enhanced functionality and personalization, such as remembering your preferences and settings.</p>
+      </div>
+      
+      <div class="cookie-option">
+        <div class="cookie-option-header">
+          <span class="cookie-option-name">Marketing Cookies</span>
+          <label class="switch">
+            <input type="checkbox" [(ngModel)]="cookiePreferences.marketing">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="cookie-option-desc">These cookies track your online activity to help us deliver more relevant advertising and measure the effectiveness of campaigns.</p>
+      </div>
+    </div>
+    <div class="cookie-modal-footer">
+      <button class="cookie-save-btn" (click)="saveCookiePreferences()">Save Preferences</button>
+      <button class="cookie-accept-all-btn" (click)="acceptAllCookies()">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+COOKIE POLICY MODAL
+══════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" *ngIf="showCookiePolicy" (click)="closeCookiePolicy()">
+  <div class="modal-content glass-card" (click)="$event.stopPropagation()">
+    <button class="modal-close" (click)="closeCookiePolicy()">✕</button>
+    <h2>Cookie Policy</h2>
+    <div class="modal-body">
+      <p class="modal-intro"><strong>Effective Date: January 1, 2025</strong> | Last Updated: May 2025</p>
+      
+      <h3>1. What Are Cookies?</h3>
+      <p>Cookies are small text files that are placed on your device (computer, tablet, or mobile phone) when you visit a website. They are widely used to make websites work more efficiently and to provide information to website owners.</p>
+      <p>Cookies allow a website to recognise your device and remember information about your visit, such as your preferred language, login status, and other settings. This makes your next visit easier and the site more useful to you.</p>
+      
+      <h3>2. How We Use Cookies</h3>
+      <p><strong>Essential Cookies:</strong> These cookies are necessary for our website to function properly. They cannot be switched off. They are usually set in response to actions you take, such as logging in or filling in forms.</p>
+      <p><strong>Analytics Cookies:</strong> These help us understand how visitors interact with our website by collecting and reporting information anonymously. We use Google Analytics to track page visits, session duration, and user behaviour.</p>
+      <p><strong>Functional Cookies:</strong> These cookies enable enhanced functionality and personalisation, including language preferences, user interface customisation, and remembering your course progress.</p>
+      <p><strong>Marketing Cookies:</strong> These cookies track your online activity to help us deliver more relevant advertising. This includes social media sharing cookies and retargeting cookies used for digital advertising campaigns.</p>
+      
+      <h3>3. Managing Your Cookie Preferences</h3>
+      <p>You can control and manage cookies in several ways:</p>
+      <ul>
+        <li><strong>Browser Settings:</strong> Most browsers allow you to refuse or accept cookies and to delete existing cookies. Please check your browser's help section for instructions.</li>
+        <li><strong>Opt-Out Tools:</strong> You can opt out of Google Analytics tracking by visiting tools.google.com/dlpage/gaoptout</li>
+        <li><strong>Platform Settings:</strong> Where applicable, you can manage cookie preferences through your account settings on our platform.</li>
+      </ul>
+      <p>Please note that if you choose to block or delete cookies, some features of our website may not function correctly.</p>
+      
+      <h3>4. Third-Party Cookies</h3>
+      <p>Some cookies on our website are set by third parties. These third parties include:</p>
+      <ul>
+        <li>Google Analytics (analytics and performance monitoring)</li>
+        <li>Paystack and Flutterwave (payment processing)</li>
+        <li>Social media platforms (sharing and engagement features)</li>
+      </ul>
+      <p>We do not control these third-party cookies. Please refer to the respective privacy policies of these third parties for more information.</p>
+      
+      <h3>5. Updates to This Cookie Policy</h3>
+      <p>We may update this Cookie Policy from time to time to reflect changes in technology, legislation, or our data practices. We will notify you of significant changes through our website.</p>
+      
+      <h3>6. Contact Us</h3>
+      <p>If you have questions about our use of cookies, please contact us at info@akiira-tech.com</p>
+    </div>
+    <button class="modal-agree" (click)="closeCookiePolicy()">I Understand</button>
+  </div>
+</div><!-- ══════════════════════════════════════════════════════════
+  COOKIE POLICY MODAL
+  ══════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay" *ngIf="showCookiePolicy" (click)="closeCookiePolicy()">
+  
+    <div class="modal-content glass-card" (click)="$event.stopPropagation()">
+  
+      <button class="modal-close" (click)="closeCookiePolicy()">✕</button>
+  
+      <h2>Cookie Policy</h2>
+  
+      <p class="modal-subtitle">
+        How Akiira Tech Uses Cookies and Tracking Technologies
+      </p>
+  
+      <div class="modal-body">
+  
+        <p class="modal-intro">
+          <strong>Effective Date:</strong> January 1, 2025
+          <span class="divider">|</span>
+          <strong>Last Updated:</strong> May 2025
+        </p>
+  
+        <p>
+          This Cookie Policy explains how Akiira Tech uses cookies and similar
+          tracking technologies when you visit our website
+          (www.akiira-tech.com). This policy should be read alongside our
+          Privacy Policy.
+        </p>
+  
+        <!-- 1 -->
+        <h3>1. What Are Cookies?</h3>
+  
+        <p>
+          Cookies are small text files that are placed on your device
+          (computer, tablet, or mobile phone) when you visit a website.
+          They are widely used to make websites work more efficiently
+          and to provide information to website owners.
+        </p>
+  
+        <p>
+          Cookies allow a website to recognise your device and remember
+          information about your visit, such as your preferred language,
+          login status, and other settings. This makes your next visit
+          easier and the site more useful to you.
+        </p>
+  
+        <!-- 2 -->
+        <h3>2. How We Use Cookies</h3>
+  
+        <p>
+          We use cookies for the following purposes:
+        </p>
+  
+        <!-- Essential -->
+        <p><strong>2.1 Essential Cookies</strong></p>
+  
+        <p>
+          These cookies are necessary for our website to function properly.
+          They cannot be switched off. They are usually set in response
+          to actions you take, such as logging in or filling in forms.
+        </p>
+  
+        <ul>
+          <li>Session cookies that keep you logged into your account</li>
+          <li>Security cookies that protect against fraudulent activity</li>
+          <li>
+            Load-balancing cookies that ensure the website remains stable
+          </li>
+        </ul>
+  
+        <!-- Analytics -->
+        <p><strong>2.2 Analytics Cookies</strong></p>
+  
+        <p>
+          These cookies help us understand how visitors interact with our
+          website by collecting and reporting information anonymously.
+        </p>
+  
+        <ul>
+          <li>
+            Google Analytics cookies that track page visits,
+            session duration, and user behaviour
+          </li>
+  
+          <li>
+            Performance monitoring cookies that identify slow-loading pages
+          </li>
+  
+          <li>
+            Error tracking cookies that help us identify and fix technical issues
+          </li>
+        </ul>
+  
+        <!-- Functional -->
+        <p><strong>2.3 Functional Cookies</strong></p>
+  
+        <p>
+          These cookies enable enhanced functionality and personalisation.
+        </p>
+  
+        <ul>
+          <li>Language preference cookies</li>
+          <li>User interface customisation cookies</li>
+          <li>
+            Cookies that remember your course progress and platform preferences
+          </li>
+        </ul>
+  
+        <!-- Marketing -->
+        <p><strong>2.4 Marketing Cookies</strong></p>
+  
+        <p>
+          These cookies track your online activity to help us deliver
+          more relevant advertising.
+        </p>
+  
+        <ul>
+          <li>
+            Social media sharing cookies from platforms like
+            Instagram and LinkedIn
+          </li>
+  
+          <li>
+            Retargeting cookies used for digital advertising campaigns
+          </li>
+        </ul>
+  
+        <!-- 3 -->
+        <h3>3. Managing Your Cookie Preferences</h3>
+  
+        <p>
+          You can control and manage cookies in several ways:
+        </p>
+  
+        <ul>
+  
+          <li>
+            <strong>Browser Settings:</strong>
+            Most browsers allow you to refuse or accept cookies
+            and to delete existing cookies. Please check your browser’s
+            help section for instructions.
+          </li>
+  
+          <li>
+            <strong>Opt-Out Tools:</strong>
+            You can opt out of Google Analytics tracking by visiting:
+            <br>
+            tools.google.com/dlpage/gaoptout
+          </li>
+  
+          <li>
+            <strong>Platform Settings:</strong>
+            Where applicable, you can manage cookie preferences
+            through your account settings on our platform.
+          </li>
+  
+        </ul>
+  
+        <p>
+          Please note that if you choose to block or delete cookies,
+          some features of our website may not function correctly.
+        </p>
+  
+        <!-- 4 -->
+        <h3>4. Third-Party Cookies</h3>
+  
+        <p>
+          Some cookies on our website are set by third parties.
+          These third parties may include:
+        </p>
+  
+        <ul>
+          <li>Google Analytics (analytics and performance monitoring)</li>
+  
+          <li>
+            Paystack and Flutterwave (payment processing)
+          </li>
+  
+          <li>
+            Social media platforms (sharing and engagement features)
+          </li>
+        </ul>
+  
+        <p>
+          We do not control these third-party cookies.
+          Please refer to the respective privacy policies
+          of these third parties for more information.
+        </p>
+  
+        <!-- 5 -->
+        <h3>5. Updates to This Cookie Policy</h3>
+  
+        <p>
+          We may update this Cookie Policy from time to time
+          to reflect changes in technology, legislation,
+          or our data practices.
+        </p>
+  
+        <p>
+          We will notify you of significant changes through our website.
+        </p>
+  
+        <!-- 6 -->
+        <h3>6. Contact Us</h3>
+  
+        <p>
+          If you have questions about our use of cookies,
+          please contact us:
+        </p>
+  
+        <p>
+          <strong>Email:</strong> info@akiira-tech.com <br>
+          <strong>Website:</strong> www.akiira-tech.com
+        </p>
+  
+      </div>
+  
+      <button class="modal-agree" (click)="closeCookiePolicy()">
+        I Understand
+      </button>
+  
+    </div>
+  </div>

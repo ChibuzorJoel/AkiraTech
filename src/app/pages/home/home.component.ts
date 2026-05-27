@@ -11,13 +11,134 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
   @ViewChildren('reveal') revealEls!: QueryList<ElementRef>;
 
+  // Cookie consent variables
+  showCookieConsent = false;
+  showCookieSettings = false;
+  showCookiePolicy = false;
+  
+  cookiePreferences = {
+    analytics: true,
+    functional: true,
+    marketing: false
+  };
+
   ngOnInit(): void {
     // Initialize video autoplay when component loads
     this.initVideoAutoplay();
+    // Check cookie consent
+    this.checkCookieConsent();
   }
 
   ngAfterViewInit(): void {
     this.initRevealAnimations();
+  }
+
+  private checkCookieConsent(): void {
+    // Check if user has already made a cookie choice
+    const cookieChoice = localStorage.getItem('cookieConsent');
+    if (!cookieChoice) {
+      // Show cookie consent popup after 1 second
+      setTimeout(() => {
+        this.showCookieConsent = true;
+      }, 1000);
+    } else {
+      // Load saved preferences
+      const savedPrefs = localStorage.getItem('cookiePreferences');
+      if (savedPrefs) {
+        this.cookiePreferences = JSON.parse(savedPrefs);
+      }
+      this.applyCookiePreferences();
+    }
+  }
+
+  acceptCookies(): void {
+    // Accept all cookies
+    this.cookiePreferences = {
+      analytics: true,
+      functional: true,
+      marketing: true
+    };
+    this.saveCookiePreferences();
+    this.showCookieConsent = false;
+  }
+
+  declineCookies(): void {
+    // Only essential cookies (disable all optional)
+    this.cookiePreferences = {
+      analytics: false,
+      functional: false,
+      marketing: false
+    };
+    this.saveCookiePreferences();
+    this.showCookieConsent = false;
+  }
+
+  openCookieSettings(): void {
+    this.showCookieSettings = true;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeCookieSettings(): void {
+    this.showCookieSettings = false;
+    document.body.style.overflow = '';
+  }
+
+  saveCookiePreferences(): void {
+    localStorage.setItem('cookieConsent', 'true');
+    localStorage.setItem('cookiePreferences', JSON.stringify(this.cookiePreferences));
+    this.applyCookiePreferences();
+    this.closeCookieSettings();
+  }
+
+  acceptAllCookies(): void {
+    this.cookiePreferences = {
+      analytics: true,
+      functional: true,
+      marketing: true
+    };
+    this.saveCookiePreferences();
+  }
+
+  private applyCookiePreferences(): void {
+    // Apply Google Analytics based on preference
+    if (this.cookiePreferences.analytics) {
+      // Initialize Google Analytics or enable tracking
+      console.log('Analytics cookies enabled');
+      // You can add your GA initialization code here
+      // Example: gtag('consent', 'update', { analytics_storage: 'granted' });
+    } else {
+      // Disable analytics tracking
+      console.log('Analytics cookies disabled');
+      // You can add GA opt-out code here
+      // Example: gtag('consent', 'update', { analytics_storage: 'denied' });
+    }
+    
+    // Apply functional cookies preference
+    if (this.cookiePreferences.functional) {
+      console.log('Functional cookies enabled');
+    } else {
+      console.log('Functional cookies disabled');
+    }
+    
+    // Apply marketing cookies preference
+    if (this.cookiePreferences.marketing) {
+      console.log('Marketing cookies enabled');
+      // Example: gtag('consent', 'update', { ad_storage: 'granted' });
+    } else {
+      console.log('Marketing cookies disabled');
+      // Example: gtag('consent', 'update', { ad_storage: 'denied' });
+    }
+  }
+
+  openCookiePolicy(event: Event): void {
+    event.preventDefault();
+    this.showCookiePolicy = true;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeCookiePolicy(): void {
+    this.showCookiePolicy = false;
+    document.body.style.overflow = '';
   }
 
   private initVideoAutoplay(): void {
