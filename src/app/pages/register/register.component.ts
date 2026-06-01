@@ -29,12 +29,13 @@ export class RegisterComponent {
   };
 
   courses = [
-    'Web Development (Full Stack)',
+    'Web Development (Full Stack, Frontend and Backend)',
     'Mobile App Development',
     'UI/UX Design',
-    'Data Science',
-    'Digital Marketing',
-    'EduTech Development',
+    'Data Analysis',
+    'Copywriting and cv writing',
+    'Virtual assistance',
+    'Social media management',
     'Graphic Design',
     'Cybersecurity'
   ];
