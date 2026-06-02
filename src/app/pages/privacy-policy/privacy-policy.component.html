@@ -1,0 +1,87 @@
+<div class="pp-root">
+    <div class="pp-bg">
+      <div class="pp-bg-orb orb-1"></div>
+      <div class="pp-bg-orb orb-2"></div>
+      <div class="pp-grid-overlay"></div>
+    </div>
+  
+    <header class="pp-header">
+      <div class="pp-header-inner">
+        <div class="pp-badge">
+          <span class="pp-badge-dot"></span>
+          NDPR Compliant
+        </div>
+        <h1 class="pp-title">Privacy <span class="pp-title-accent">Policy</span></h1>
+        <p class="pp-subtitle">
+          At <strong>{{ companyName }}</strong>, your privacy is not an afterthought — it's foundational.
+          This policy governs how we collect, use, and protect your personal data in line with
+          Nigeria's Data Protection Regulation (NDPR) 2019.
+        </p>
+        <div class="pp-meta">
+          <span class="pp-meta-item">
+            <span class="pp-meta-icon">📅</span>
+            Last Updated: <strong>{{ lastUpdated }}</strong>
+          </span>
+          <span class="pp-meta-divider">|</span>
+          <span class="pp-meta-item">
+            <span class="pp-meta-icon">🏢</span>
+            {{ companyName }}
+          </span>
+        </div>
+      </div>
+    </header>
+  
+    <div class="pp-layout">
+      <!-- Sticky Sidebar -->
+      <aside class="pp-sidebar">
+        <div class="pp-toc">
+          <p class="pp-toc-label">Contents</p>
+          <nav>
+            <a
+              *ngFor="let section of sections"
+              class="pp-toc-link"
+              [class.active]="activeSection === section.id"
+              (click)="scrollTo(section.id)">
+              <span class="pp-toc-icon">{{ section.icon }}</span>
+              <span class="pp-toc-text">{{ section.title }}</span>
+            </a>
+          </nav>
+        </div>
+      </aside>
+  
+      <!-- Main Content -->
+      <main class="pp-content">
+        <div
+          *ngFor="let section of sections"
+          class="pp-section"
+          [id]="section.id">
+  
+          <div class="pp-section-header">
+            <span class="pp-section-icon">{{ section.icon }}</span>
+            <h2 class="pp-section-title">{{ section.title }}</h2>
+          </div>
+  
+          <p class="pp-section-text">{{ section.content }}</p>
+  
+          <div *ngFor="let sub of section.subsections" class="pp-subsection">
+            <h3 *ngIf="sub.subtitle" class="pp-subsection-title">{{ sub.subtitle }}</h3>
+            <ul class="pp-list">
+              <li *ngFor="let item of sub.items" class="pp-list-item">
+                <span class="pp-list-dot"></span>
+                {{ item }}
+              </li>
+            </ul>
+          </div>
+        </div>
+  
+        <div class="pp-footer-note">
+          <p>
+            This Privacy Policy is governed by the laws of the Federal Republic of Nigeria.
+            For questions, contact us at
+            <a [href]="'mailto:' + companyEmail" class="pp-link">{{ companyEmail }}</a>.
+          </p>
+          <p class="pp-copyright">© 2025 {{ companyName }}. All rights reserved.</p>
+        </div>
+      </main>
+    </div>
+  </div>

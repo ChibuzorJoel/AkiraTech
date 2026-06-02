@@ -8,6 +8,7 @@ import { ServicesComponent }  from './pages/services/services.component';
 import { ContactComponent }   from './pages/contact/contact.component';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
   { path: '',           component: HomeComponent },
@@ -16,6 +17,8 @@ const routes: Routes = [
   { path: 'projects',   component: PortfolioComponent },
   { path: 'contact',    component: ContactComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'privacy', component: PrivacyPolicyComponent },
+  
   { path: '**',         redirectTo: '' }                  
 ];
 

@@ -1,0 +1,206 @@
+<div class="rp-root">
+    <!-- Background -->
+    <div class="rp-bg">
+      <div class="rp-bg-grid"></div>
+      <div class="rp-bg-glow"></div>
+    </div>
+  
+    <!-- Header -->
+    <header class="rp-header">
+      <div class="rp-header-inner">
+        <div class="rp-eyebrow">
+          <span class="rp-eyebrow-line"></span>
+          Legal Documentation
+          <span class="rp-eyebrow-line"></span>
+        </div>
+        <h1 class="rp-title">Refund &<br><span class="rp-title-accent">Cancellation</span> Policy</h1>
+        <p class="rp-subtitle">
+          Clear, fair terms that protect both you and us. Please read before engaging our services.
+        </p>
+        <div class="rp-meta-row">
+          <span class="rp-meta-chip">📅 Last Updated: {{ lastUpdated }}</span>
+          <span class="rp-meta-chip">🏢 {{ companyName }}</span>
+          <span class="rp-meta-chip">🇳🇬 Nigerian Law Governed</span>
+        </div>
+      </div>
+    </header>
+  
+    <!-- Main -->
+    <main class="rp-main">
+  
+      <!-- Key Highlights -->
+      <section class="rp-section">
+        <h2 class="rp-section-title">At a Glance</h2>
+        <div class="rp-highlights">
+          <div *ngFor="let h of highlights" class="rp-highlight-card">
+            <span class="rp-highlight-icon">{{ h.icon }}</span>
+            <p class="rp-highlight-value">{{ h.value }}</p>
+            <p class="rp-highlight-label">{{ h.label }}</p>
+            <p class="rp-highlight-note">{{ h.note }}</p>
+          </div>
+        </div>
+      </section>
+  
+      <!-- Payment Structure -->
+      <section class="rp-section">
+        <h2 class="rp-section-title">
+          <span class="rp-section-number">01</span>
+          Payment Structure
+        </h2>
+        <div class="rp-card">
+          <p class="rp-body-text">
+            All projects at {{ companyName }} operate on a <strong>milestone-based payment model</strong>:
+          </p>
+          <div class="rp-payment-tiers">
+            <div class="rp-tier">
+              <div class="rp-tier-pct">50%</div>
+              <div class="rp-tier-info">
+                <strong>Upfront Deposit</strong>
+                <span>Due before project kickoff. Non-refundable. Covers initial research, planning, and resource allocation.</span>
+              </div>
+            </div>
+            <div class="rp-tier-arrow">→</div>
+            <div class="rp-tier">
+              <div class="rp-tier-pct">25%</div>
+              <div class="rp-tier-info">
+                <strong>Mid-Project Milestone</strong>
+                <span>Due upon delivery and approval of agreed design/development milestone.</span>
+              </div>
+            </div>
+            <div class="rp-tier-arrow">→</div>
+            <div class="rp-tier">
+              <div class="rp-tier-pct">25%</div>
+              <div class="rp-tier-info">
+                <strong>Final Payment</strong>
+                <span>Due before final files/credentials are handed over and site goes live.</span>
+              </div>
+            </div>
+          </div>
+          <p class="rp-note-text">
+            ⚠️ For smaller projects under ₦200,000, full payment upfront may be required.
+            This will be specified in your project proposal.
+          </p>
+        </div>
+      </section>
+  
+      <!-- Refund Eligibility -->
+      <section class="rp-section">
+        <h2 class="rp-section-title">
+          <span class="rp-section-number">02</span>
+          Refund Eligibility
+        </h2>
+        <p class="rp-body-text" style="margin-bottom: 24px;">
+          Refund eligibility depends on the stage at which a project is cancelled or disputed.
+        </p>
+  
+        <div class="rp-scenarios">
+          <div *ngFor="let s of scenarios" class="rp-scenario" [attr.data-type]="s.type">
+            <div class="rp-scenario-left">
+              <div class="rp-scenario-badge" [attr.data-type]="s.type">
+                <span *ngIf="s.type === 'full'">✅ Full Refund</span>
+                <span *ngIf="s.type === 'partial'">🔶 Partial Refund</span>
+                <span *ngIf="s.type === 'none'">❌ No Refund</span>
+              </div>
+            </div>
+            <div class="rp-scenario-right">
+              <p class="rp-scenario-situation">{{ s.situation }}</p>
+              <p class="rp-scenario-outcome">{{ s.outcome }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <!-- Non-Refundable Items -->
+      <section class="rp-section">
+        <h2 class="rp-section-title">
+          <span class="rp-section-number">03</span>
+          Non-Refundable Items
+        </h2>
+        <div class="rp-card">
+          <p class="rp-body-text">The following are strictly non-refundable under all circumstances:</p>
+          <ul class="rp-list">
+            <li>Upfront deposit / retainer fee (50% of project value)</li>
+            <li>Domain name registrations purchased on your behalf</li>
+            <li>Hosting fees and server setup costs</li>
+            <li>SSL certificates and third-party licensing fees</li>
+            <li>Rush fees for expedited delivery</li>
+            <li>Completed and approved design revisions</li>
+            <li>Consultation fees for discovery sessions</li>
+            <li>Third-party API or service subscriptions activated for your project</li>
+          </ul>
+        </div>
+      </section>
+  
+      <!-- Dispute Resolution -->
+      <section class="rp-section">
+        <h2 class="rp-section-title">
+          <span class="rp-section-number">04</span>
+          Dispute Resolution
+        </h2>
+        <div class="rp-card rp-dispute-card">
+          <div class="rp-dispute-steps">
+            <div class="rp-dispute-step">
+              <div class="rp-step-num">1</div>
+              <div class="rp-step-content">
+                <strong>Direct Resolution (Days 1–7)</strong>
+                <span>Contact us at <a [href]="'mailto:' + companyEmail" class="rp-link">{{ companyEmail }}</a> with your concern. We aim to resolve all disputes amicably within 7 business days.</span>
+              </div>
+            </div>
+            <div class="rp-dispute-step">
+              <div class="rp-step-num">2</div>
+              <div class="rp-step-content">
+                <strong>Mediation (Days 8–14)</strong>
+                <span>If unresolved, both parties agree to engage a neutral third-party mediator before escalating to legal action.</span>
+              </div>
+            </div>
+            <div class="rp-dispute-step">
+              <div class="rp-step-num">3</div>
+              <div class="rp-step-content">
+                <strong>Legal Jurisdiction</strong>
+                <span>This policy is governed by Nigerian law. Any unresolved disputes will be handled under the jurisdiction of Nigerian courts.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <!-- FAQs -->
+      <section class="rp-section">
+        <h2 class="rp-section-title">
+          <span class="rp-section-number">05</span>
+          Frequently Asked Questions
+        </h2>
+        <div class="rp-faqs">
+          <div
+            *ngFor="let faq of faqs"
+            class="rp-faq"
+            [class.open]="faq.open"
+            (click)="toggleFaq(faq)">
+            <div class="rp-faq-q">
+              <span>{{ faq.q }}</span>
+              <span class="rp-faq-arrow" [class.rotated]="faq.open">▾</span>
+            </div>
+            <div class="rp-faq-a" [class.open]="faq.open">
+              <p>{{ faq.a }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <!-- Contact CTA -->
+      <div class="rp-cta">
+        <div class="rp-cta-inner">
+          <h3 class="rp-cta-title">Have Questions?</h3>
+          <p class="rp-cta-text">
+            Our team is happy to walk you through this policy before you sign anything.
+            We believe in full transparency.
+          </p>
+          <a [href]="'mailto:' + companyEmail" class="rp-cta-btn">
+            Contact Us → {{ companyEmail }}
+          </a>
+        </div>
+      </div>
+  
+    </main>
+  </div>
+  

@@ -13,6 +13,9 @@ import { ServicesComponent } from './pages/services/services.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import { CookieBannerComponent } from './pages/cookie-banner/cookie-banner.component';
+import { RefundPolicyComponent } from './pages/refund-policy/refund-policy.component';
 
 
 @NgModule({
@@ -26,6 +29,9 @@ import { RegisterComponent } from './pages/register/register.component';
     ContactComponent,
     PortfolioComponent,
     RegisterComponent,
+    PrivacyPolicyComponent,
+    CookieBannerComponent,
+    RefundPolicyComponent,
     
   ],
   imports: [
