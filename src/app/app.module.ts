@@ -13,15 +13,12 @@ import { ServicesComponent } from './pages/services/services.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { RegisterComponent } from './pages/register/register.component';
-<<<<<<< HEAD
+
 import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
 import { TermsOfServiceComponent } from './shared/terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from './shared/privacy-policy/privacy-policy.component';
-=======
-import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
-import { CookieBannerComponent } from './pages/cookie-banner/cookie-banner.component';
-import { RefundPolicyComponent } from './pages/refund-policy/refund-policy.component';
->>>>>>> 2ec4906f09b7035cd63d59d2fd12095ec372c679
+
+
 
 
 @NgModule({
@@ -35,16 +32,11 @@ import { RefundPolicyComponent } from './pages/refund-policy/refund-policy.compo
     ContactComponent,
     PortfolioComponent,
     RegisterComponent,
-<<<<<<< HEAD
+
     CourseDetailComponent,
     TermsOfServiceComponent,
     PrivacyPolicyComponent,
-=======
-    PrivacyPolicyComponent,
-    CookieBannerComponent,
-    RefundPolicyComponent,
->>>>>>> 2ec4906f09b7035cd63d59d2fd12095ec372c679
-    
+
   ],
   imports: [
     BrowserModule,

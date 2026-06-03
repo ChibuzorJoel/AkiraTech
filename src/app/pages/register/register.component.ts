@@ -29,7 +29,6 @@ export class RegisterComponent implements OnInit {
   };
 
   courses = [
-<<<<<<< HEAD
     'Web Development (Full Stack)',
     'Frontend Development',
     'Backend Development',
@@ -39,17 +38,6 @@ export class RegisterComponent implements OnInit {
     'Virtual assistance',
     'Copywriting and CV writing',
     'Social media management'
-=======
-    'Web Development (Full Stack, Frontend and Backend)',
-    'Mobile App Development',
-    'UI/UX Design',
-    'Data Analysis',
-    'Copywriting and cv writing',
-    'Virtual assistance',
-    'Social media management',
-    'Graphic Design',
-    'Cybersecurity'
->>>>>>> 2ec4906f09b7035cd63d59d2fd12095ec372c679
   ];
 
   sources = [

@@ -8,12 +8,9 @@ import { ServicesComponent }  from './pages/services/services.component';
 import { ContactComponent }   from './pages/contact/contact.component';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { RegisterComponent } from './pages/register/register.component';
-<<<<<<< HEAD
+
 import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
 
-=======
-import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
->>>>>>> 2ec4906f09b7035cd63d59d2fd12095ec372c679
 
 const routes: Routes = [
   { path: '',           component: HomeComponent },
@@ -22,12 +19,9 @@ const routes: Routes = [
   { path: 'projects',   component: PortfolioComponent },
   { path: 'contact',    component: ContactComponent },
   { path: 'register', component: RegisterComponent },
-<<<<<<< HEAD
+
   { path: 'course/:id', component: CourseDetailComponent },
-=======
-  { path: 'privacy', component: PrivacyPolicyComponent },
-  
->>>>>>> 2ec4906f09b7035cd63d59d2fd12095ec372c679
+
   { path: '**',         redirectTo: '' }                  
 ];
 
