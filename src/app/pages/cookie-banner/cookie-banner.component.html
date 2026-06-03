@@ -1,0 +1,70 @@
+<div class="cb-backdrop" *ngIf="isVisible">
+    <div class="cb-panel" [class.expanded]="showDetails">
+  
+      <div class="cb-header">
+        <div class="cb-logo-area">
+          <div class="cb-cookie-icon">🍪</div>
+          <div>
+            <p class="cb-brand">Akiira Tech</p>
+            <h2 class="cb-title">We use cookies</h2>
+          </div>
+        </div>
+        <div class="cb-ndpr-tag">NDPR Compliant</div>
+      </div>
+  
+      <p class="cb-description">
+        We use cookies to enhance your browsing experience, serve personalised content, and
+        analyse our traffic. By clicking <strong>"Accept All"</strong>, you consent to our use of cookies.
+      </p>
+  
+      <button class="cb-toggle-details" (click)="toggleDetails()">
+        <span>{{ showDetails ? 'Hide' : 'Customise' }} preferences</span>
+        <span class="cb-chevron" [class.rotated]="showDetails">▾</span>
+      </button>
+  
+      <div class="cb-details" [class.open]="showDetails">
+        <div class="cb-cookie-list">
+          <div
+            *ngFor="let cookie of cookieTypes"
+            class="cb-cookie-item"
+            [class.always-on]="cookie.alwaysOn">
+  
+            <div class="cb-cookie-info">
+              <div class="cb-cookie-icon-small">{{ cookie.icon }}</div>
+              <div class="cb-cookie-text">
+                <span class="cb-cookie-label">{{ cookie.label }}</span>
+                <span class="cb-cookie-desc">{{ cookie.description }}</span>
+                <span class="cb-cookie-examples">e.g. {{ cookie.examples }}</span>
+              </div>
+            </div>
+  
+            <div class="cb-toggle-wrapper">
+              <span *ngIf="cookie.alwaysOn" class="cb-always-on-label">Always On</span>
+              <button
+                *ngIf="!cookie.alwaysOn"
+                class="cb-toggle"
+                [class.active]="preferences[cookie.key]"
+                (click)="togglePreference(cookie.key)"
+                [attr.aria-label]="'Toggle ' + cookie.label"
+                [attr.aria-checked]="preferences[cookie.key]"
+                role="switch">
+                <span class="cb-toggle-thumb"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="cb-actions">
+        <button class="cb-btn cb-btn-reject" (click)="rejectAll()">Reject All</button>
+        <button *ngIf="showDetails" class="cb-btn cb-btn-custom" (click)="saveCustom()">Save Preferences</button>
+        <button class="cb-btn cb-btn-accept" (click)="acceptAll()">Accept All</button>
+      </div>
+  
+      <div class="cb-footer">
+        <a routerLink="/privacy-policy" class="cb-footer-link">Privacy Policy</a>
+        <span class="cb-footer-sep">·</span>
+        <span class="cb-footer-text">© 2025 Akiira Tech</span>
+      </div>
+    </div>
+  </div>
