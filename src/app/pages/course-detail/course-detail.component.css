@@ -1,0 +1,285 @@
+.course-detail-page {
+  min-height: 100vh;
+  background: #080412;
+}
+
+.back-nav {
+  padding: 20px 5%;
+  background: #0f0a1a;
+}
+
+.back-btn {
+  background: transparent;
+  border: 1px solid rgba(107, 191, 115, 0.3);
+  color: #6bbf73;
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(107, 191, 115, 0.1);
+}
+
+.course-hero {
+  padding: 60px 5%;
+  background: linear-gradient(135deg, #0f0a1a, #1a0f2e);
+  text-align: center;
+}
+
+.course-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.course-hero h1 {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: 20px;
+  font-family: 'Syne', sans-serif;
+}
+
+.course-meta {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.meta-badge {
+  background: rgba(107, 191, 115, 0.1);
+  border: 1px solid rgba(107, 191, 115, 0.3);
+  padding: 6px 14px;
+  border-radius: 50px;
+  color: #6bbf73;
+  font-size: 0.85rem;
+}
+
+.price-section {
+  margin-top: 20px;
+}
+
+.current-price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #6bbf73;
+}
+
+.old-price {
+  font-size: 1.2rem;
+  text-decoration: line-through;
+  color: #7a5d8a;
+  margin-left: 10px;
+}
+
+.tabs-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.tabs-header {
+  display: flex;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 30px;
+}
+
+.tabs-header button {
+  background: transparent;
+  border: none;
+  padding: 12px 24px;
+  color: #a88cb8;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tabs-header button.active {
+  color: #6bbf73;
+  border-bottom: 2px solid #6bbf73;
+}
+
+.course-description {
+  color: #a88cb8;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+.features-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.features-list li {
+  color: #a88cb8;
+  padding: 8px 0;
+}
+
+.curriculum-week {
+  background: #0f0a1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.curriculum-week h4 {
+  color: #6bbf73;
+  margin-bottom: 15px;
+}
+
+.curriculum-week ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.curriculum-week li {
+  color: #a88cb8;
+  padding: 6px 0;
+  padding-left: 20px;
+  position: relative;
+}
+
+.curriculum-week li::before {
+  content: "•";
+  color: #6bbf73;
+  position: absolute;
+  left: 0;
+}
+
+.payment-section {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+.payment-card, .success-card {
+  background: #0f0a1a;
+  border: 1px solid rgba(107, 191, 115, 0.3);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+}
+
+.payment-card h2 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.payment-card p {
+  color: #a88cb8;
+  margin-bottom: 10px;
+}
+
+.total-price {
+  font-size: 1.3rem;
+  color: #6bbf73;
+}
+
+.payment-buttons {
+  display: flex;
+  gap: 15px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.paystack-btn {
+  flex: 1;
+  background: linear-gradient(135deg, #6bbf73, #4d9e55);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.paystack-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.paystack-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.whatsapp-btn {
+  flex: 1;
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.whatsapp-btn:hover {
+  transform: translateY(-2px);
+}
+
+.payment-note {
+  font-size: 0.75rem;
+  color: #7a5d8a;
+}
+
+.success-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #6bbf73, #4d9e55);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  margin: 0 auto 20px;
+}
+
+.success-card h2 {
+  color: white;
+  margin-bottom: 15px;
+}
+
+.success-card p {
+  color: #a88cb8;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.home-btn {
+  display: inline-block;
+  background: #6bbf73;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .features-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .payment-buttons {
+    flex-direction: column;
+  }
+  
+  .course-hero h1 {
+    font-size: 1.8rem;
+  }
+  
+  .current-price {
+    font-size: 1.5rem;
+  }
+}

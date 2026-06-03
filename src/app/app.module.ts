@@ -13,6 +13,9 @@ import { ServicesComponent } from './pages/services/services.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
+import { TermsOfServiceComponent } from './shared/terms-of-service/terms-of-service.component';
+import { PrivacyPolicyComponent } from './shared/privacy-policy/privacy-policy.component';
 
 
 @NgModule({
@@ -26,6 +29,9 @@ import { RegisterComponent } from './pages/register/register.component';
     ContactComponent,
     PortfolioComponent,
     RegisterComponent,
+    CourseDetailComponent,
+    TermsOfServiceComponent,
+    PrivacyPolicyComponent,
     
   ],
   imports: [

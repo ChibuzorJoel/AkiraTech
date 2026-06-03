@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   submitted = false;
   formSubmitted = false;
   submitting = false;
@@ -30,13 +30,14 @@ export class RegisterComponent {
 
   courses = [
     'Web Development (Full Stack)',
+    'Frontend Development',
+    'Backend Development',
     'Mobile App Development',
     'UI/UX Design',
-    'Data Science',
-    'Digital Marketing',
-    'EduTech Development',
-    'Graphic Design',
-    'Cybersecurity'
+    'Data analysis',
+    'Virtual assistance',
+    'Copywriting and CV writing',
+    'Social media management'
   ];
 
   sources = [
@@ -50,7 +51,29 @@ export class RegisterComponent {
     'Other'
   ];
 
-  constructor(private http: HttpClient, private router: Router) {}
+  // Map course names to IDs for routing
+  courseToIdMap: { [key: string]: number } = {
+    'Web Development (Full Stack)': 1,
+    'Frontend Development': 2,
+    'Backend Development': 3,
+    'Mobile App Development': 4,
+    'UI/UX Design': 5,
+    'Data analysis': 6,
+    'Virtual assistance': 7,
+    'Copywriting and CV writing': 8,
+    'Social media management': 9
+  };
+
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    // Check if course is pre-selected via query params
+    this.route.queryParams.subscribe(params => {
+      if (params['course']) {
+        this.registerForm.course = params['course'];
+      }
+    });
+  }
 
   get isFormValid(): boolean {
     return this.registerForm.fullName.trim() !== '' &&
@@ -58,7 +81,7 @@ export class RegisterComponent {
            this.isValidEmail(this.registerForm.email) &&
            this.registerForm.phone.trim() !== '' &&
            this.registerForm.course !== '' &&
-           this.agreeToTerms === true; // Terms validation added
+           this.agreeToTerms === true;
   }
 
   isValidEmail(email: string): boolean {
@@ -101,25 +124,36 @@ export class RegisterComponent {
     document.body.style.overflow = 'hidden';
   }
 
-  closeModal() {
+  closeTermsModal() {
     this.showTermsModal = false;
+    document.body.style.overflow = '';
+  }
+
+  closePrivacyModal() {
     this.showPrivacyModal = false;
     document.body.style.overflow = '';
   }
 
   acceptTerms() {
     this.agreeToTerms = true;
-    this.closeModal();
+    this.closeTermsModal();
   }
 
-  submit() {
+  // Redirect to course detail page
+  proceedToCourse() {
     this.formSubmitted = true;
-    if (!this.isFormValid) return;
     
-    this.submitting = true;
-    this.submitError = false;
+    // Validate required fields before proceeding
+    if (!this.registerForm.fullName.trim() ||
+        !this.registerForm.email.trim() ||
+        !this.isValidEmail(this.registerForm.email) ||
+        !this.registerForm.phone.trim() ||
+        !this.registerForm.course) {
+      return; // Stop if validation fails
+    }
     
-    const formData = {
+    // Save registration data to localStorage for the course page
+    const registrationData = {
       fullName: this.registerForm.fullName,
       email: this.registerForm.email,
       phone: this.registerForm.phone,
@@ -127,44 +161,21 @@ export class RegisterComponent {
       source: this.registerForm.source || 'Not specified',
       message: this.registerForm.message || 'No message provided',
       agreedToTerms: this.agreeToTerms,
-      submittedAt: new Date().toISOString(),
-      page: 'Registration Page'
+      timestamp: new Date().toISOString()
     };
     
-    // Replace with your Formspree registration form endpoint
-    const formspreeUrl = 'https://formspree.io/f/xjgppopv';
+    localStorage.setItem('pendingRegistration', JSON.stringify(registrationData));
     
-    this.http.post(formspreeUrl, formData, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-    .subscribe({
-      next: () => {
-        this.submitting = false;
-        this.submitted = true;
-        
-        // Reset form after 5 seconds and redirect or show success
-        setTimeout(() => {
-          this.submitted = false;
-          this.formSubmitted = false;
-          this.resetForm();
-          // Optional: Redirect to home or contact page
-          // this.router.navigate(['/']);
-        }, 5000);
-      },
-      error: () => {
-        this.submitting = false;
-        this.submitError = true;
-        this.errorMessage = 'Registration failed. Please try again or contact us directly on WhatsApp.';
-        
-        setTimeout(() => {
-          this.submitError = false;
-          this.errorMessage = '';
-        }, 5000);
-      }
-    });
+    // Redirect to the course detail page
+    const courseId = this.courseToIdMap[this.registerForm.course];
+    if (courseId) {
+      this.router.navigate(['/course', courseId], { 
+        queryParams: { 
+          name: this.registerForm.fullName,
+          email: this.registerForm.email
+        } 
+      });
+    }
   }
 
   resetForm() {
