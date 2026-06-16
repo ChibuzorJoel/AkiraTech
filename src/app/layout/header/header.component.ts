@@ -1,14 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
-
+export class HeaderComponent implements OnInit, OnDestroy {
+  
+  isScrolled  = false;
   // Mobile menu state
   isMenuOpen: boolean = false;
+
+
+  @HostListener('window:scroll')
+  onScroll() {
+    this.isScrolled = window.scrollY > 10;
+  }
+
 
   // Toggle mobile menu
   toggleMenu() {
@@ -27,5 +36,6 @@ export class HeaderComponent {
     this.isMenuOpen = false;
     document.body.style.overflow = '';
   }
-
+  ngOnInit() {}
+  ngOnDestroy() { document.body.style.overflow = ''; }
 }
