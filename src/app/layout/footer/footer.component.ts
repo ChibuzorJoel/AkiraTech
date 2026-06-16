@@ -11,7 +11,6 @@ export class FooterComponent {
   showCookieModal = false;
   showRefundModal = false;
 
-  
   openTermsModal(event: Event) {
     event.preventDefault();
     this.showTermsModal = true;
@@ -24,13 +23,13 @@ export class FooterComponent {
     document.body.style.overflow = 'hidden';
   }
 
-  openCookiePolicy(event: Event) {
+  openCookieModal(event: Event) {
     event.preventDefault();
     this.showCookieModal = true;
     document.body.style.overflow = 'hidden';
   }
 
-  openRefundPolicy(event: Event) {
+  openRefundModal(event: Event) {
     event.preventDefault();
     this.showRefundModal = true;
     document.body.style.overflow = 'hidden';
@@ -57,7 +56,6 @@ export class FooterComponent {
   }
 
   acceptTerms() {
-    // Handle terms acceptance if needed (e.g., store in localStorage)
     this.closeTermsModal();
   }
 }
