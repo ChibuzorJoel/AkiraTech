@@ -11,6 +11,7 @@ export class FooterComponent {
   showCookieModal = false;
   showRefundModal = false;
 
+  
   openTermsModal(event: Event) {
     event.preventDefault();
     this.showTermsModal = true;
