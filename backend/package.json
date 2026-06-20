@@ -1,24 +1,41 @@
 {
-  "name": "backend",
+  "name": "akiira-tech-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend API for Akiira Tech - Web & App Development Company",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo 'No build step required for backend'",
+    "render-build": "npm install --production",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "engines": {
+    "node": "18.18.0",
+    "npm": "9.8.1"
+  },
+  "keywords": [
+    "akiira-tech",
+    "api",
+    "backend",
+    "express",
+    "mongodb"
+  ],
+  "author": "Akiira Tech",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "crypto-browserify": "^3.3.0",
     "dotenv": "^17.4.2",
+    "express": "^4.21.2",
     "express-rate-limit": "^8.5.2",
     "jsonwebtoken": "^9.0.3",
     "mongodb": "^6.21.0",
     "mongoose": "^8.24.0",
     "nodemailer": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
   }
 }

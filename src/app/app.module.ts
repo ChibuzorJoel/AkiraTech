@@ -1,11 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-<<<<<<< HEAD
-import { HttpClientModule } from '@angular/common/http'; // Add this import
-=======
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'; // Add this import
->>>>>>> 099fdc74fd5256915004f084e838813b64f02078
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
@@ -17,21 +13,16 @@ import { ServicesComponent } from './pages/services/services.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { RegisterComponent } from './pages/register/register.component';
-
 import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
 import { TermsOfServiceComponent } from './shared/terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from './shared/privacy-policy/privacy-policy.component';
-<<<<<<< HEAD
-=======
+
 import { LoginComponent } from './admin/login/login.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { RegistrationComponent } from './admin/registration/registration.component';
-import { AuthInterceptor } from './services/auth.interceptor';
 import { SidebarComponent } from './admin/sidebar/sidebar.component';
->>>>>>> 099fdc74fd5256915004f084e838813b64f02078
 
-
-
+import { AuthInterceptor } from './services/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -44,18 +35,13 @@ import { SidebarComponent } from './admin/sidebar/sidebar.component';
     ContactComponent,
     PortfolioComponent,
     RegisterComponent,
-
     CourseDetailComponent,
     TermsOfServiceComponent,
     PrivacyPolicyComponent,
-<<<<<<< HEAD
-=======
     LoginComponent,
     DashboardComponent,
     RegistrationComponent,
-    SidebarComponent,
->>>>>>> 099fdc74fd5256915004f084e838813b64f02078
-
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -63,13 +49,9 @@ import { SidebarComponent } from './admin/sidebar/sidebar.component';
     FormsModule,
     HttpClientModule
   ],
-<<<<<<< HEAD
-  providers: [],
-=======
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
->>>>>>> 099fdc74fd5256915004f084e838813b64f02078
   bootstrap: [AppComponent]
 })
 export class AppModule { }
