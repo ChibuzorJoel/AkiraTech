@@ -1,0 +1,143 @@
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- Company Info -->
+    <div class="footer-section company">
+      <h2 class="brand">AKIIRA <span>TECH</span></h2>
+      <p>
+        We provide cutting-edge website and mobile development solutions
+        that help businesses grow and succeed online.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/services">Services</a></li>
+        <li><a routerLink="/projects">Projects</a></li>
+        <li><a routerLink="/about">About</a></li>
+        <li><a routerLink="/contact">Contact</a></li>
+        <li><a routerLink="/courses">Courses</a></li>
+      </ul>
+    </div>
+
+    <!-- Legal -->
+    <div class="footer-section">
+      <h3>Legal</h3>
+      <ul>
+        <li><a href="#" (click)="openTermsModal($event)">Terms of Service</a></li>
+        <li><a href="#" (click)="openPrivacyModal($event)">Privacy Policy</a></li>
+      </ul>
+    </div>
+
+    <!-- Services -->
+    <div class="footer-section">
+      <h3>Services</h3>
+      <ul>
+        <li>Website Development</li>
+        <li>Mobile App Development</li>
+        <li>Website Maintenance</li>
+        <li>UI/UX Design</li>
+        <li>EduTech Solutions</li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-section">
+      <h3>Contact</h3>
+      <p>Email: akiiratech@gmail.com</p>
+      <p>WhatsApp: +2349021706710</p>
+      <div class="social-links">
+        <a href="#" class="social-icon">📘</a>
+        <a href="#" class="social-icon">📷</a>
+        <a href="#" class="social-icon">🐦</a>
+        <a href="#" class="social-icon">💼</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom -->
+  <div class="footer-bottom">
+    <p>© 2026 Akiira Tech. All rights reserved.</p>
+  </div>
+
+</footer>
+
+<!-- Legal Modals -->
+<app-terms-of-service 
+  *ngIf="showTermsModal" 
+  (close)="closeTermsModal()" 
+  (accept)="acceptTerms()">
+</app-terms-of-service>
+
+<app-privacy-policy 
+  *ngIf="showPrivacyModal" 
+  (close)="closePrivacyModal()">
+</app-privacy-policy>
+
+<!-- Cookie Policy Modal -->
+<div class="modal-overlay" *ngIf="showCookieModal" (click)="closeCookieModal()">
+  <div class="modal-content glass-card" (click)="$event.stopPropagation()">
+    <button class="modal-close" (click)="closeCookieModal()">✕</button>
+    <h2>Cookie Policy</h2>
+    <p class="modal-subtitle">How Akiira Tech Uses Cookies and Tracking Technologies</p>
+    <div class="modal-body">
+      <p class="modal-intro"><strong>Effective Date:</strong> January 1, 2025 | <strong>Last Updated:</strong> May 2025</p>
+      
+      <h3>1. What Are Cookies?</h3>
+      <p>Cookies are small text files placed on your device when you visit a website. They help make websites work more efficiently and provide information to website owners.</p>
+      
+      <h3>2. How We Use Cookies</h3>
+      <p><strong>Essential Cookies:</strong> Necessary for our website to function properly. Cannot be switched off.</p>
+      <p><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our website using Google Analytics.</p>
+      <p><strong>Functional Cookies:</strong> Enable enhanced functionality and personalization.</p>
+      <p><strong>Marketing Cookies:</strong> Track online activity to deliver more relevant advertising.</p>
+      
+      <h3>3. Managing Your Cookie Preferences</h3>
+      <p>You can control cookies through your browser settings. Please note that blocking cookies may affect website functionality.</p>
+      
+      <h3>4. Third-Party Cookies</h3>
+      <p>We use third-party services including Google Analytics, Paystack, Flutterwave, and social media platforms that may set their own cookies.</p>
+      
+      <h3>5. Updates to This Policy</h3>
+      <p>We may update this Cookie Policy from time to time. Changes will be posted on this page.</p>
+      
+      <h3>6. Contact Us</h3>
+      <p>For questions about cookies, contact info@akiira-tech.com</p>
+    </div>
+    <button class="modal-agree" (click)="closeCookieModal()">I Understand</button>
+  </div>
+</div>
+
+<!-- Refund Policy Modal -->
+<div class="modal-overlay" *ngIf="showRefundModal" (click)="closeRefundModal()">
+  <div class="modal-content glass-card" (click)="$event.stopPropagation()">
+    <button class="modal-close" (click)="closeRefundModal()">✕</button>
+    <h2>Refund Policy</h2>
+    <p class="modal-subtitle">Our Policy on Refunds and Cancellations</p>
+    <div class="modal-body">
+      <p class="modal-intro"><strong>Effective Date:</strong> January 1, 2025 | <strong>Last Updated:</strong> May 2025</p>
+      
+      <h3>1. Web and App Development Services</h3>
+      <p><strong>Project Deposits:</strong> Generally non-refundable as they cover initial discovery and planning costs. Exceptions apply if Akiira Tech cannot commence the project within agreed timeline.</p>
+      <p><strong>Project Completion Payments:</strong> Non-refundable once final deliverable is approved. Raise concerns within 14 days of delivery.</p>
+      <p><strong>Maintenance Plans:</strong> Monthly fees are non-refundable. Cancel with 30 days written notice.</p>
+      
+      <h3>2. EdTech Platform and Courses</h3>
+      <p><strong>Course Enrolment Fees:</strong> Full refund within 48 hours before accessing content. 50% refund within 7 days if less than 20% of content accessed. No refund after 7 days or if more than 20% accessed.</p>
+      <p><strong>Scholarship Commitment Fees:</strong> Strictly non-refundable.</p>
+      <p><strong>Platform Subscription Fees:</strong> Non-refundable for current billing period.</p>
+      
+      <h3>3. How to Request a Refund</h3>
+      <p>Email info@akiira-tech.com with "Refund Request" as subject. Include your full name, email, order number, and reason. Acknowledged within 2 business days, decision within 7 business days. Approved refunds processed within 14 business days.</p>
+      
+      <h3>4. Contact Us</h3>
+      <p>Email: info@akiira-tech.com | Website: www.akiira-tech.com</p>
+    </div>
+    <button class="modal-agree" (click)="closeRefundModal()">I Understand</button>
+  </div>
+</div>

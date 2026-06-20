@@ -1,0 +1,174 @@
+<!-- ══════════════════════════════════════════════════════════
+     PROJECTS / PORTFOLIO PAGE — Akiira Tech
+     Matches home page: purple/pink/green palette, Syne + DM Sans
+     ══════════════════════════════════════════════════════════ -->
+
+<!-- HERO -->
+<section class="port-hero">
+    <div class="port-hero-orb orb1"></div>
+    <div class="port-hero-orb orb2"></div>
+    <div class="port-hero-orb orb3"></div>
+    <div class="hero-dot-grid"></div>
+  
+    <div class="port-hero-inner">
+      <div class="section-eyebrow">
+        <span class="eyebrow-dot"></span> Our Work
+      </div>
+      <h1>Projects We're<br><span class="hl">Proud Of</span></h1>
+      <p>A curated selection of our finest digital work — from startups to established brands, across Nigeria and beyond.</p>
+  
+      <div class="port-hero-stats">
+        <div class="phs-item">
+          <div class="phs-num">150+</div>
+          <div class="phs-lbl">Projects Delivered</div>
+        </div>
+        <div class="phs-sep"></div>
+        <div class="phs-item">
+          <div class="phs-num">50+</div>
+          <div class="phs-lbl">Happy Clients</div>
+        </div>
+        <div class="phs-sep"></div>
+        <div class="phs-item">
+          <div class="phs-num">5+</div>
+          <div class="phs-lbl">Years Experience</div>
+        </div>
+        <div class="phs-sep"></div>
+        <div class="phs-item">
+          <div class="phs-num">100%</div>
+          <div class="phs-lbl">Satisfaction Rate</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  <!-- FILTER + GRID -->
+  <section class="port-main">
+  
+    <!-- Filter tabs -->
+    <div class="port-filters" #reveal>
+      <button
+        *ngFor="let f of filters"
+        class="pf-btn"
+        [class.active]="activeFilter === f.value"
+        (click)="setFilter(f.value)">
+        <span class="pf-icon">{{ f.icon }}</span>
+        {{ f.label }}
+        <span class="pf-count">{{ getCount(f.value) }}</span>
+      </button>
+    </div>
+  
+    <!-- Project grid -->
+    <div class="port-grid" #reveal>
+      <div class="port-card" *ngFor="let p of filteredProjects; let i = index"
+           [class.featured]="p.featured">
+  
+        <!-- Visual panel -->
+        <div class="pc-visual" [style.background]="p.grad">
+          <div class="pc-pattern"></div>
+          <div class="pc-emoji">{{ p.emoji }}</div>
+  
+          <!-- Hover overlay -->
+          <div class="pc-overlay">
+            <div class="pc-overlay-inner">
+              <div class="pc-tags-overlay">
+                <span *ngFor="let t of p.tags">{{ t }}</span>
+              </div>
+              <div class="pc-view-btn">View Case Study ↗</div>
+            </div>
+          </div>
+  
+          <!-- Featured badge -->
+          <div class="pc-badge" *ngIf="p.featured">⭐ Featured</div>
+        </div>
+  
+        <!-- Info panel -->
+        <div class="pc-info">
+          <div class="pc-category">{{ p.catLabel }}</div>
+          <h3>{{ p.title }}</h3>
+          <p>{{ p.desc }}</p>
+          <div class="pc-footer">
+            <div class="pc-stack">
+              <span *ngFor="let t of p.tags">{{ t }}</span>
+            </div>
+            <div class="pc-result" *ngIf="p.result">
+              <span class="pcr-icon">📈</span>{{ p.result }}
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  
+    <!-- Empty state -->
+    <div class="port-empty" *ngIf="filteredProjects.length === 0">
+      <div class="pe-icon">🔍</div>
+      <p>No projects in this category yet — check back soon!</p>
+    </div>
+  
+  </section>
+  
+  
+  <!-- PROCESS STRIP -->
+  <section class="port-process">
+    <div class="pp-inner">
+      <div class="pp-head" #reveal>
+        <div class="section-eyebrow"><span class="eyebrow-dot"></span> How We Work</div>
+        <h2 class="section-title">Our <span>Process</span></h2>
+      </div>
+      <div class="pp-steps">
+        <div class="pp-step" *ngFor="let s of process" #reveal>
+          <div class="pps-num">{{ s.num }}</div>
+          <div class="pps-icon">{{ s.icon }}</div>
+          <h4>{{ s.title }}</h4>
+          <p>{{ s.desc }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  <!-- TESTIMONIAL STRIP -->
+  <section class="port-testi">
+    <div class="pt-inner">
+      <div class="pt-head" #reveal>
+        <div class="section-eyebrow"><span class="eyebrow-dot"></span> Client Feedback</div>
+        <h2 class="section-title">What They <span>Said</span></h2>
+      </div>
+      <div class="pt-grid">
+        <div class="pt-card" *ngFor="let t of testimonials" #reveal>
+          <div class="pt-stars">★★★★★</div>
+          <p class="pt-quote">"{{ t.quote }}"</p>
+          <div class="pt-author">
+            <div class="pt-av" [style.background]="t.avGrad">{{ t.initials }}</div>
+            <div>
+              <div class="pt-name">{{ t.name }}</div>
+              <div class="pt-role">{{ t.role }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  <!-- CTA -->
+  <section class="port-cta">
+    <div class="port-hero-orb orb1" style="opacity:0.5"></div>
+    <div class="port-hero-orb orb2" style="opacity:0.3"></div>
+    <div class="hero-dot-grid"></div>
+    <div class="pc-cta-inner" #reveal>
+      <div class="section-eyebrow"><span class="eyebrow-dot"></span>Let's Work Together</div>
+      <h2>Ready to Be Our<br><span class="hl">Next Success Story?</span></h2>
+      <p>Tell us about your project and let's bring it to life.</p>
+      <div class="pc-cta-btns">
+        <a routerLink="/contact" class="btn-primary">🚀 Start a Project</a>
+        <a href="https://wa.me/2349021706710" class="btn-secondary">💬 WhatsApp Us</a>
+      </div>
+      <div class="pc-cta-trust">
+        <span>✓ Free consultation</span>
+        <span>✓ No obligation</span>
+        <span>✓ Response in 24hrs</span>
+      </div>
+    </div>
+  </section>

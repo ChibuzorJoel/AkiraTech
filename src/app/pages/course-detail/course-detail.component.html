@@ -1,0 +1,81 @@
+<div class="course-detail-page" *ngIf="course">
+  <!-- Back Button -->
+  <div class="back-nav">
+    <button (click)="goBack()" class="back-btn">← Back to Registration</button>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="course-hero">
+    <div class="course-hero-content">
+      <span class="course-icon">{{ course.icon }}</span>
+      <h1>{{ course.title }}</h1>
+      <div class="course-meta">
+        <span class="meta-badge">⏱️ {{ course.duration }}</span>
+        <span class="meta-badge">📚 {{ course.level }}</span>
+      </div>
+      <div class="price-section">
+        <span class="current-price">{{ course.price }}</span>
+        <span class="old-price">{{ course.originalPrice }}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabs -->
+  <section class="tabs-section">
+    <div class="tabs-header">
+      <button (click)="setActiveTab('overview')" [class.active]="activeTab === 'overview'">Course Overview</button>
+      <button (click)="setActiveTab('curriculum')" [class.active]="activeTab === 'curriculum'">Curriculum</button>
+    </div>
+
+    <div class="tab-content">
+      <!-- Overview Tab -->
+      <div *ngIf="activeTab === 'overview'">
+        <p class="course-description">{{ course.longDescription }}</p>
+        
+        <h3>What You'll Learn</h3>
+        <ul class="features-list">
+          <li *ngFor="let feature of course.features">✓ {{ feature }}</li>
+        </ul>
+      </div>
+
+      <!-- Curriculum Tab -->
+      <div *ngIf="activeTab === 'curriculum'">
+        <div class="curriculum-week" *ngFor="let week of course.curriculum">
+          <h4>{{ week.week }}</h4>
+          <ul>
+            <li *ngFor="let topic of week.topics">{{ topic }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Payment Section -->
+  <section class="payment-section">
+    <div class="payment-card" *ngIf="!paymentSuccess">
+      <h2>Complete Your Enrollment</h2>
+      <p>Student: <strong>{{ userInfo?.name || 'Guest' }}</strong></p>
+      <p>Email: <strong>{{ userInfo?.email || 'Not provided' }}</strong></p>
+      <p>Course: <strong>{{ course.title }}</strong></p>
+      <p>Total: <strong class="total-price">{{ course.price }}</strong></p>
+      
+      <div class="payment-buttons">
+        <button (click)="processPayment()" [disabled]="paymentProcessing" class="paystack-btn">
+          {{ paymentProcessing ? 'Processing...' : 'Pay with Paystack →' }}
+        </button>
+        <button (click)="goToWhatsApp()" class="whatsapp-btn">
+          💬 Chat on WhatsApp
+        </button>
+      </div>
+      <p class="payment-note">Secure payment via Paystack. We accept cards, bank transfers, and USSD.</p>
+    </div>
+
+    <div class="success-card" *ngIf="paymentSuccess">
+      <div class="success-icon">✓</div>
+      <h2>Registration Successful!</h2>
+      <p>Thank you {{ userInfo?.name }} for enrolling in {{ course.title }}!</p>
+      <p>We've sent a confirmation email with next steps. A representative will contact you within 24 hours.</p>
+      <a routerLink="/" class="home-btn">Return to Home</a>
+    </div>
+  </section>
+</div>

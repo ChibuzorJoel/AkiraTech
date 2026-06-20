@@ -1,0 +1,59 @@
+/* sidebar.component.css */
+.sidebar {
+    width: 240px; min-height: 100vh;
+    background: #0a0514;
+    display: flex; flex-direction: column;
+    transition: width 0.3s ease; flex-shrink: 0;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+  .sidebar.collapsed { width: 72px; }
+  
+  .sidebar-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 16px; border-bottom: 1px solid rgba(255,255,255,0.06);
+    min-height: 72px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; overflow: hidden; }
+  .brand-mark {
+    width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+    background: linear-gradient(135deg, #7a3d8c, #3b1b4d);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 12px;
+  }
+  .brand-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800; color: #fff; display: block; }
+  .brand-name span { color: #6bbf73; }
+  .brand-sub  { font-size: 10px; color: rgba(255,255,255,0.3); display: block; }
+  
+  .collapse-btn {
+    background: rgba(255,255,255,0.08); border: none; border-radius: 6px;
+    color: rgba(255,255,255,0.5); width: 24px; height: 24px;
+    cursor: pointer; font-size: 12px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  
+  .sidebar-nav { flex: 1; padding: 16px 10px; display: flex; flex-direction: column; gap: 4px; }
+  
+  .nav-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 14px; border-radius: 12px;
+    color: rgba(255,255,255,0.45); text-decoration: none;
+    font-size: 14px; font-weight: 500;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap; overflow: hidden;
+  }
+  .nav-item:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.85); }
+  .nav-item.active { background: rgba(107,191,115,0.14); color: #6bbf73; }
+  .nav-icon  { font-size: 16px; flex-shrink: 0; }
+  .nav-label { font-family: 'DM Sans', sans-serif; }
+  
+  .sidebar-footer { padding: 16px 10px; border-top: 1px solid rgba(255,255,255,0.06); }
+  .logout-btn {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 14px; border-radius: 12px; border: none;
+    background: transparent; color: rgba(255,255,255,0.35);
+    cursor: pointer; font-size: 14px; width: 100%;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap; overflow: hidden;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .logout-btn:hover { background: rgba(239,68,68,0.1); color: #ef4444; }

@@ -1,0 +1,113 @@
+/* app.component.css */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: #f5f0fa; }
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  background: #f5f0fa;
+}
+.admin-shell {
+  display: flex;
+  min-height: 100vh;
+}
+.admin-main {
+  flex: 1;
+  overflow-y: auto;
+  background: #f5f0fa;
+}
+
+/* ── WhatsApp Floating Button ── */
+.wa-fab {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: 9999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+}
+
+.wa-fab svg {
+  width: 28px;
+  height: 28px;
+}
+
+.wa-fab:hover {
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 12px 32px rgba(37, 211, 102, 0.6);
+}
+
+.wa-fab:hover .wa-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.wa-tooltip {
+  position: absolute;
+  right: 68px;
+  background: #1a1a2e;
+  color: #fff;
+  font-family: 'Satoshi', 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.wa-tooltip::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-left-color: #1a1a2e;
+  border-right: none;
+}
+
+/* Pulse ring animation */
+.wa-fab::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(37, 211, 102, 0.4);
+  animation: waPulse 2s ease-out infinite;
+}
+/* app.component.css — update .admin-main */
+.admin-main {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;  /* ← add this */
+  background: #f5f0fa;
+  min-width: 0;
+  width: 100%;          /* ← add this */
+}
+
+@keyframes waPulse {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  70%  { transform: scale(1.35); opacity: 0; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
