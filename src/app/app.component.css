@@ -111,3 +111,17 @@ html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: #f5f0
   70%  { transform: scale(1.35); opacity: 0; }
   100% { transform: scale(1.35); opacity: 0; }
 }
+.admin-main {
+  flex: 1;
+  overflow-y: auto;
+  background: #f5f0fa;
+}
+/* ... other styles ... */
+.admin-main {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #f5f0fa;
+  min-width: 0;
+  width: 100%;
+}
