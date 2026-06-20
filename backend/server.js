@@ -18,17 +18,33 @@ app.set('trust proxy', 1);
 const allowedOrigins = [
   process.env.FRONTEND_URL || 'http://localhost:4200',
   process.env.ADMIN_URL || 'http://localhost:4200',
+  'https://akiira-tech.com',
+  'https://akiiratech.onrender.com',
+  'http://localhost:4200',
+  'http://localhost:3000'
 ];
 
 app.use(cors({
-  origin: (origin, cb) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      return cb(null, true);
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) {
+      return callback(null, true);
     }
-    cb(new Error('Not allowed by CORS'));
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log('❌ Blocked by CORS:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
   },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
 }));
+
+// Handle preflight requests
+app.options('*', cors());
 
 /* ── Body parser ── */
 app.use(express.json());
@@ -59,6 +75,7 @@ app.get('/api/health', (req, res) => {
   res.json({
     status: 'OK',
     timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development'
   });
 });
 
