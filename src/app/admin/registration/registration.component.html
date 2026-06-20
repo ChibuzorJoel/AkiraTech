@@ -1,0 +1,143 @@
+<!-- registrations.component.html -->
+<div class="registrations-page">
+
+    <div class="page-header">
+      <div>
+        <h1>Registrations</h1>
+        <p>{{ total }} total registration{{ total !== 1 ? 's' : '' }}</p>
+      </div>
+    </div>
+  
+    <!-- Filters -->
+  <div class="filters-bar">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" [(ngModel)]="search" placeholder="Search name, email or phone..."
+        (keyup.enter)="search$()">
+    </div>
+    <select [(ngModel)]="status" (change)="search$()">
+      <option value="">All Statuses</option>
+      <option *ngFor="let s of statuses" [value]="s">{{ s | titlecase }}</option>
+    </select>
+    <select [(ngModel)]="course" (change)="search$()">
+      <option value="">All Courses</option>
+      <option *ngFor="let c of courses" [value]="c">{{ c }}</option>
+    </select>
+    <button class="filter-btn" (click)="search$()">Filter</button>
+    <button class="clear-btn" (click)="clearFilters()">Clear</button>
+    <button class="export-btn" (click)="exportCsv()" [disabled]="exporting" title="Download CSV of current filters">
+      <span *ngIf="!exporting">⬇️ Export CSV</span>
+      <span *ngIf="exporting">Preparing...</span>
+    </button>
+  </div>
+
+  <p class="export-hint" *ngIf="status || course || search">
+    Export will include only registrations matching your current filters
+    <span *ngIf="status">· status: <strong>{{ status | titlecase }}</strong></span>
+    <span *ngIf="course">· course: <strong>{{ course }}</strong></span>
+    <span *ngIf="search">· search: <strong>"{{ search }}"</strong></span>
+  </p>
+  
+    <!-- Loading -->
+    <div class="loading-state" *ngIf="loading">
+      <div class="spinner-lg"></div><p>Loading...</p>
+    </div>
+  
+    <!-- Table -->
+    <div class="table-wrap" *ngIf="!loading">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Course</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let r of registrations" (click)="openModal(r)" class="table-row">
+            <td><strong>{{ r.fullName }}</strong></td>
+            <td>{{ r.email }}</td>
+            <td>{{ r.phone }}</td>
+            <td class="course-cell">{{ r.course }}</td>
+            <td>
+              <span class="status-badge"
+                [style.background]="getStatusColor(r.status) + '18'"
+                [style.color]="getStatusColor(r.status)">
+                {{ r.status }}
+              </span>
+            </td>
+            <td>{{ formatDate(r.createdAt) }}</td>
+            <td><button class="view-btn" (click)="openModal(r); $event.stopPropagation()">View</button></td>
+          </tr>
+          <tr *ngIf="!registrations.length">
+            <td colspan="7" class="empty-cell">No registrations found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Pagination -->
+    <div class="pagination" *ngIf="pages > 1 && !loading">
+      <button (click)="prevPage()" [disabled]="page === 1">← Prev</button>
+      <span>Page {{ page }} of {{ pages }}</span>
+      <button (click)="nextPage()" [disabled]="page === pages">Next →</button>
+    </div>
+  </div>
+  
+  <!-- Detail Modal -->
+  <div class="modal-overlay" *ngIf="modalOpen" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()" *ngIf="selected">
+      <div class="modal-top">
+        <div>
+          <h2>{{ selected.fullName }}</h2>
+          <p>{{ selected.course }}</p>
+        </div>
+        <button class="close-modal" (click)="closeModal()">✕</button>
+      </div>
+  
+      <div class="modal-body">
+        <div class="detail-grid">
+          <div class="detail-item"><span class="detail-label">Email</span><span>{{ selected.email }}</span></div>
+          <div class="detail-item"><span class="detail-label">Phone</span><span>{{ selected.phone }}</span></div>
+          <div class="detail-item"><span class="detail-label">Source</span><span>{{ selected.source }}</span></div>
+          <div class="detail-item"><span class="detail-label">Registered</span><span>{{ formatDate(selected.createdAt) }}</span></div>
+          <div class="detail-item full" *ngIf="selected.message">
+            <span class="detail-label">Message</span>
+            <span>{{ selected.message }}</span>
+          </div>
+        </div>
+  
+        <div class="update-section">
+          <h3>Update Status</h3>
+          <div class="status-row">
+            <select [(ngModel)]="newStatus">
+              <option *ngFor="let s of statuses" [value]="s">{{ s | titlecase }}</option>
+            </select>
+            <button class="save-btn" (click)="saveStatus()" [disabled]="updatingStatus">
+              {{ updatingStatus ? 'Saving...' : 'Save' }}
+            </button>
+          </div>
+          <textarea [(ngModel)]="newNotes" placeholder="Add notes about this registration..." rows="3"></textarea>
+        </div>
+  
+        <div class="modal-actions">
+          <a [href]="'mailto:' + selected.email" class="action-btn email-btn">✉️ Send Email</a>
+          <a [href]="getWhatsAppLink(selected.phone)"
+   target="_blank"
+   class="action-btn wa-btn">
+  💬 WhatsApp
+</a>
+          <button class="action-btn delete-btn" (click)="deleteReg()">
+            {{ deleteConfirm ? '⚠️ Confirm Delete' : '🗑 Delete' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="new-registration-banner" *ngIf="newCount > 0" (click)="refreshNow()">
+    🔔 {{ newCount }} new registration{{ newCount > 1 ? 's' : '' }} — click to refresh
+  </div>

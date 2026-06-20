@@ -1,0 +1,103 @@
+<!-- dashboard.component.html -->
+<div class="dashboard">
+
+  <div class="page-header">
+    <div>
+      <h1>Dashboard</h1>
+      <p>Overview of registrations and activity</p>
+    </div>
+    <a routerLink="/registrations" class="view-all-btn">View All Registrations →</a>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="spinner-lg"></div>
+    <p>Loading dashboard...</p>
+  </div>
+
+  <!-- Error -->
+  <div class="error-state" *ngIf="error && !loading">
+    <p>{{ error }}</p>
+    <button (click)="ngOnInit()">Retry</button>
+  </div>
+
+  <ng-container *ngIf="stats && !loading">
+
+    <!-- Stat cards -->
+    <div class="stat-grid">
+      <div class="stat-card total">
+        <div class="stat-icon">📋</div>
+        <div class="stat-info">
+          <div class="stat-num">{{ stats.stats.total }}</div>
+          <div class="stat-label">Total Registrations</div>
+        </div>
+      </div>
+      <div class="stat-card pending">
+        <div class="stat-icon">⏳</div>
+        <div class="stat-info">
+          <div class="stat-num">{{ stats.stats.pending }}</div>
+          <div class="stat-label">Pending</div>
+        </div>
+      </div>
+      <div class="stat-card contacted">
+        <div class="stat-icon">📞</div>
+        <div class="stat-info">
+          <div class="stat-num">{{ stats.stats.contacted }}</div>
+          <div class="stat-label">Contacted</div>
+        </div>
+      </div>
+      <div class="stat-card enrolled">
+        <div class="stat-icon">🎓</div>
+        <div class="stat-info">
+          <div class="stat-num">{{ stats.stats.enrolled }}</div>
+          <div class="stat-label">Enrolled</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom two-col -->
+    <div class="bottom-grid">
+
+      <!-- Recent registrations -->
+      <div class="panel">
+        <div class="panel-header">
+          <h3>Recent Registrations</h3>
+          <a routerLink="/registrations">See all</a>
+        </div>
+        <div class="recent-list">
+          <div class="recent-item" *ngFor="let r of stats.recent">
+            <div class="recent-avatar">{{ r.fullName[0] }}</div>
+            <div class="recent-info">
+              <div class="recent-name">{{ r.fullName }}</div>
+              <div class="recent-course">{{ r.course }}</div>
+            </div>
+            <span class="status-badge" [style.background]="getStatusColor(r.status) + '22'"
+              [style.color]="getStatusColor(r.status)">
+              {{ r.status }}
+            </span>
+          </div>
+          <div class="empty-state" *ngIf="!stats.recent.length">No registrations yet.</div>
+        </div>
+      </div>
+
+      <!-- Courses breakdown -->
+      <div class="panel">
+        <div class="panel-header">
+          <h3>Registrations by Course</h3>
+        </div>
+        <div class="course-list">
+          <div class="course-row" *ngFor="let c of stats.byCourse">
+            <div class="course-name">{{ c._id }}</div>
+            <div class="course-bar-wrap">
+              <div class="course-bar"
+                [style.width.%]="(c.count / stats.stats.total) * 100"></div>
+            </div>
+            <div class="course-count">{{ c.count }}</div>
+          </div>
+          <div class="empty-state" *ngIf="!stats.byCourse.length">No data yet.</div>
+        </div>
+      </div>
+
+    </div>
+  </ng-container>
+</div>

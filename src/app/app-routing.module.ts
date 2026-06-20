@@ -10,6 +10,10 @@ import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { RegisterComponent } from './pages/register/register.component';
 
 import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
+import { LoginComponent } from './admin/login/login.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { RegistrationComponent } from './admin/registration/registration.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
@@ -19,6 +23,11 @@ const routes: Routes = [
   { path: 'projects',   component: PortfolioComponent },
   { path: 'contact',    component: ContactComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'login',         component: LoginComponent },
+  { path: 'dashboard',     component: DashboardComponent,     canActivate: [AuthGuard] },
+  { path: 'registrations', component: RegistrationComponent, canActivate: [AuthGuard] },
+  { path: '',              redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '**',            redirectTo: '/dashboard' },
 
   { path: 'course/:id', component: CourseDetailComponent },
 
