@@ -23,6 +23,8 @@ import { RegistrationComponent } from './admin/registration/registration.compone
 import { SidebarComponent } from './admin/sidebar/sidebar.component';
 
 import { AuthInterceptor } from './services/auth.interceptor';
+import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
+import { AdminLayoutComponent } from './admin/admin-layout/admin-layout.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { AuthInterceptor } from './services/auth.interceptor';
     LoginComponent,
     DashboardComponent,
     RegistrationComponent,
-    SidebarComponent
+    SidebarComponent,
+    AdminHeaderComponent,
+    AdminLayoutComponent
   ],
   imports: [
     BrowserModule,

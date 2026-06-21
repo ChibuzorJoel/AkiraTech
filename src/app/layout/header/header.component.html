@@ -1,63 +1,71 @@
-<header class="header" [class.scrolled]="isScrolled">
-  <div class="nav-container">
+<!-- Only show header if NOT on admin page -->
+<ng-container *ngIf="!isAdminPage">
+  <header class="header" [class.scrolled]="isScrolled">
+    <div class="nav-container">
 
-    <!-- Hamburger (mobile left) -->
-    <div class="hamburger-menu" [class.active]="isMenuOpen" (click)="toggleMenu()" aria-label="Open menu">
-      <span></span>
-      <span></span>
-      <span></span>
+      <!-- Hamburger (mobile left) -->
+      <div class="hamburger-menu" [class.active]="isMenuOpen" (click)="toggleMenu()" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <!-- Logo -->
+      <a routerLink="/" class="logo">
+        <div class="logo-mark">AT</div>
+        <span class="brand-name">AKIIRA <span class="tech">TECH</span></span>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="nav-links">
+        <a routerLink="/"        routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+        <a routerLink="/services" routerLinkActive="active">Services</a>
+        <a routerLink="/projects" routerLinkActive="active">Projects</a>
+        <a routerLink="/about"    routerLinkActive="active">About</a>
+        <a routerLink="/contact"  routerLinkActive="active">Contact</a>
+        <div class="nav-divider"></div>
+        <a routerLink="/register" class="register-nav-btn">🎓 Register Now</a>
+      </nav>
+
+      <!-- Desktop CTA -->
+      <div class="nav-cta">
+        <a routerLink="/contact" class="contact-btn">Get Started</a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Sidebar overlay -->
+  <div class="sidebar-overlay" [class.active]="isMenuOpen" (click)="closeMenu()"></div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" [class.active]="isMenuOpen">
+
+    <div class="sidebar-header">
+      <a routerLink="/" class="logo" (click)="closeMenu()">
+        <div class="logo-mark">AT</div>
+        <span class="brand-name">AKIIRA <span class="tech">TECH</span></span>
+      </a>
+      <button class="close-btn" (click)="closeMenu()" aria-label="Close menu">✕</button>
     </div>
 
-    <!-- Logo -->
-    <a routerLink="/" class="logo">
-      <div class="logo-mark">AT</div>
-      <span class="brand-name">AKIIRA <span class="tech">TECH</span></span>
-    </a>
-
-    <!-- Desktop nav -->
-    <nav class="nav-links">
-      <a routerLink="/"        routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
-      <a routerLink="/services" routerLinkActive="active">Services</a>
-      <a routerLink="/projects" routerLinkActive="active">Projects</a>
-      <a routerLink="/about"    routerLinkActive="active">About</a>
-      <a routerLink="/contact"  routerLinkActive="active">Contact</a>
-      <div class="nav-divider"></div>
-      <a routerLink="/register" class="register-nav-btn">🎓 Register Now</a>
+    <nav class="sidebar-nav">
+      <a routerLink="/"         (click)="closeMenu()"><div class="nav-icon">🏠</div> Home</a>
+      <a routerLink="/services" (click)="closeMenu()"><div class="nav-icon">⚙️</div> Services</a>
+      <a routerLink="/projects" (click)="closeMenu()"><div class="nav-icon">💼</div> Projects</a>
+      <a routerLink="/about"    (click)="closeMenu()"><div class="nav-icon">👋</div> About</a>
+      <a routerLink="/contact"  (click)="closeMenu()"><div class="nav-icon">✉️</div> Contact</a>
     </nav>
 
-    <!-- Desktop CTA -->
-    <div class="nav-cta">
-      <a routerLink="/contact" class="contact-btn">Get Started</a>
+    <div class="sidebar-footer">
+      <a routerLink="/contact"  class="sidebar-cta-btn"      (click)="closeMenu()">Get Started</a>
+      <a routerLink="/register" class="sidebar-register-link" (click)="closeMenu()">🎓 Register Now</a>
     </div>
 
   </div>
-</header>
+</ng-container>
 
-<!-- Sidebar overlay -->
-<div class="sidebar-overlay" [class.active]="isMenuOpen" (click)="closeMenu()"></div>
-
-<!-- Sidebar -->
-<div class="sidebar" [class.active]="isMenuOpen">
-
-  <div class="sidebar-header">
-    <a routerLink="/" class="logo" (click)="closeMenu()">
-      <div class="logo-mark">AT</div>
-      <span class="brand-name">AKIIRA <span class="tech">TECH</span></span>
-    </a>
-    <button class="close-btn" (click)="closeMenu()" aria-label="Close menu">✕</button>
-  </div>
-
-  <nav class="sidebar-nav">
-    <a routerLink="/"         (click)="closeMenu()"><div class="nav-icon">🏠</div> Home</a>
-    <a routerLink="/services" (click)="closeMenu()"><div class="nav-icon">⚙️</div> Services</a>
-    <a routerLink="/projects" (click)="closeMenu()"><div class="nav-icon">💼</div> Projects</a>
-    <a routerLink="/about"    (click)="closeMenu()"><div class="nav-icon">👋</div> About</a>
-    <a routerLink="/contact"  (click)="closeMenu()"><div class="nav-icon">✉️</div> Contact</a>
-  </nav>
-
-  <div class="sidebar-footer">
-    <a routerLink="/contact"  class="sidebar-cta-btn"      (click)="closeMenu()">Get Started</a>
-    <a routerLink="/register" class="sidebar-register-link" (click)="closeMenu()">🎓 Register Now</a>
-  </div>
-
-</div>
+<!-- Show nothing if on admin page -->
+<ng-container *ngIf="isAdminPage">
+  <!-- Optional: Show a minimal admin header here instead -->
+</ng-container>

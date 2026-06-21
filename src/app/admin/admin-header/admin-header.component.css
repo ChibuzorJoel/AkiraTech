@@ -1,0 +1,146 @@
+.admin-header {
+  background: #1a0f2e;
+  border-bottom: 2px solid rgba(107, 191, 115, 0.2);
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.admin-header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.admin-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-logo-icon {
+  font-size: 1.5rem;
+}
+
+.admin-logo-text {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+}
+
+.admin-logo-text span {
+  color: #6bbf73;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-nav a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.admin-nav a:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+.admin-nav a.active {
+  background: rgba(107, 191, 115, 0.15);
+  color: #6bbf73;
+}
+
+.admin-user {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.admin-user-name {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+}
+
+.admin-logout-btn {
+  background: rgba(255, 0, 0, 0.1);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  padding: 6px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.admin-logout-btn:hover {
+  background: rgba(255, 0, 0, 0.2);
+}
+
+.admin-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.admin-mobile-menu {
+  display: none;
+  flex-direction: column;
+  padding: 16px;
+  gap: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.admin-mobile-menu a,
+.admin-mobile-menu button {
+  padding: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.admin-mobile-menu a:hover,
+.admin-mobile-menu button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+.admin-mobile-menu button {
+  color: #ff6b6b;
+}
+
+@media (max-width: 768px) {
+  .admin-nav {
+    display: none;
+  }
+  
+  .admin-user {
+    display: none;
+  }
+  
+  .admin-hamburger {
+    display: block;
+  }
+  
+  .admin-mobile-menu {
+    display: flex;
+  }
+}

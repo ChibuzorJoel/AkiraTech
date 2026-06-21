@@ -6,7 +6,7 @@
       <h1>Dashboard</h1>
       <p>Overview of registrations and activity</p>
     </div>
-    <a routerLink="/registrations" class="view-all-btn">View All Registrations →</a>
+    <a routerLink="/admin/registrations" class="view-all-btn">View All Registrations →</a>
   </div>
 
   <!-- Loading -->
@@ -62,7 +62,7 @@
       <div class="panel">
         <div class="panel-header">
           <h3>Recent Registrations</h3>
-          <a routerLink="/registrations">See all</a>
+          <a routerLink="/admin/registrations">See all</a>
         </div>
         <div class="recent-list">
           <div class="recent-item" *ngFor="let r of stats.recent">

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,21 +9,26 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   
-  isScrolled  = false;
-  // Mobile menu state
+  isScrolled = false;
   isMenuOpen: boolean = false;
+  isAdminPage = false;
 
+  constructor(private router: Router) {} // Add constructor
 
   @HostListener('window:scroll')
   onScroll() {
     this.isScrolled = window.scrollY > 10;
   }
 
+  ngOnInit() {
+    // Check if current route is an admin page
+    this.router.events.subscribe(() => {
+      this.isAdminPage = this.router.url.includes('/admin');
+    });
+  }
 
-  // Toggle mobile menu
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
-    
     
     if (this.isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -31,11 +37,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Close mobile menu
   closeMenu() {
     this.isMenuOpen = false;
     document.body.style.overflow = '';
   }
-  ngOnInit() {}
-  ngOnDestroy() { document.body.style.overflow = ''; }
+
+  ngOnDestroy() { 
+    document.body.style.overflow = ''; 
+  }
 }

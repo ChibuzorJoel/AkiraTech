@@ -1,0 +1,29 @@
+<header class="admin-header">
+  <div class="admin-header-container">
+    <div class="admin-logo">
+      <span class="admin-logo-icon">⚡</span>
+      <span class="admin-logo-text">Akiira <span>Admin</span></span>
+    </div>
+    
+    <nav class="admin-nav">
+      <a routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/admin/registrations" routerLinkActive="active">Registrations</a>
+      <a routerLink="/admin/courses" routerLinkActive="active">Courses</a>
+    </nav>
+    
+    <div class="admin-user">
+      <span class="admin-user-name">{{ adminName || 'Admin' }}</span>
+      <button class="admin-logout-btn" (click)="logout()">Logout</button>
+    </div>
+    
+    <button class="admin-hamburger" (click)="toggleMenu()">☰</button>
+  </div>
+  
+  <!-- Mobile menu -->
+  <div class="admin-mobile-menu" *ngIf="isMenuOpen">
+    <a routerLink="/admin/dashboard" (click)="toggleMenu()">Dashboard</a>
+    <a routerLink="/admin/registrations" (click)="toggleMenu()">Registrations</a>
+    <a routerLink="/admin/courses" (click)="toggleMenu()">Courses</a>
+    <button (click)="logout()">Logout</button>
+  </div>
+</header>

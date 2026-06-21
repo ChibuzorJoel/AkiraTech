@@ -1,0 +1,24 @@
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f8f5fa;
+}
+
+.admin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.admin-content {
+  flex: 1;
+  padding: 24px;
+}
+
+/* When sidebar is collapsed (if you have that feature) */
+@media (max-width: 768px) {
+  .admin-main {
+    margin-left: 0;
+  }
+}

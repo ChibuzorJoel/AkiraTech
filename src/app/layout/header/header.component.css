@@ -360,3 +360,7 @@
   box-shadow: 0 8px 24px rgba(59, 27, 77, 0.45);
   color: #ffffff;
 }
+
+:host-context(.admin-page) {
+  display: none !important;
+}
