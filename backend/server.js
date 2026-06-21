@@ -5,9 +5,11 @@ const rateLimit = require('express-rate-limit');
 const crypto = require('crypto'); // ✅ FIX: ensure crypto is available
 require('dotenv').config();
 
-const authRoutes = require('./routes/auth.routes');
-const registrationRoutes = require('./routes/registration.routes');
-const adminRoutes = require('./routes/admin.routes');
+const authRoutes          = require('./routes/auth.routes');
+const registrationRoutes  = require('./routes/registration.routes');
+const adminRoutes         = require('./routes/admin.routes');
+const contactRoutes       = require('./routes/contact.routes');
+const quickRegisterRoutes = require('./routes/quickRegister.routes');
 
 const app = express();
 
@@ -69,6 +71,8 @@ app.use('/api/auth/', authLimiter);
 app.use('/api/auth', authRoutes);
 app.use('/api/registrations', registrationRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/contact', contactRoutes);
+app.use('/api/quick-register', quickRegisterRoutes);
 
 /* ── Health Check ── */
 app.get('/api/health', (req, res) => {

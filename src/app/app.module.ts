@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
+import { CommonModule } from '@angular/common';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
@@ -25,6 +27,11 @@ import { SidebarComponent } from './admin/sidebar/sidebar.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
 import { AdminLayoutComponent } from './admin/admin-layout/admin-layout.component';
+import { AdminContactComponent } from './admin/contact/contact.component';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -43,6 +50,7 @@ import { AdminLayoutComponent } from './admin/admin-layout/admin-layout.componen
     LoginComponent,
     DashboardComponent,
     RegistrationComponent,
+    AdminContactComponent,
     SidebarComponent,
     AdminHeaderComponent,
     AdminLayoutComponent
@@ -51,7 +59,8 @@ import { AdminLayoutComponent } from './admin/admin-layout/admin-layout.componen
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    CommonModule,
+    HttpClientModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

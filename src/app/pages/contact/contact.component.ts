@@ -1,5 +1,8 @@
 import { Component, AfterViewInit, ElementRef, QueryList, ViewChildren } from '@angular/core';
-import { HttpClient } from '@angular/common/http'; 
+import { HttpClient } from '@angular/common/http';
+
+// ── point this at your backend ──
+const API_BASE = 'http://localhost:5000/api';
 
 @Component({
   selector: 'app-contact',
@@ -8,26 +11,28 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ContactComponent implements AfterViewInit {
   @ViewChildren('reveal') reveals!: QueryList<ElementRef>;
- 
+
   // Contact form variables
   submitted = false;
   formSubmitted = false;
   submitting = false;
-  submitError = false; 
+  submitError = false;
   errorMessage = '';
- 
+
   form = {
     firstName: '', lastName: '',
     email: '', phone: '',
     service: '', budget: '', message: ''
   };
- 
+
   // Registration form variables
   showRegisterForm = false;
   registerSubmitted = false;
   registerFormSubmitted = false;
   registerSubmitting = false;
-  
+  registerError = false;
+  registerErrorMessage = '';
+
   registerForm = {
     fullName: '',
     email: '',
@@ -35,18 +40,18 @@ export class ContactComponent implements AfterViewInit {
     source: '',
     message: ''
   };
- 
+
   services = [
     'Website Development', 'Mobile App Development', 'EduTech',
     'E-Commerce Store', 'UI/UX Design',
     'SEO & Digital Marketing', 'Website Maintenance', 'Other'
   ];
- 
+
   budgets = [
     'Under ₦150,000', '₦150,000 – ₦350,000',
     '₦350,000 – ₦750,000', 'Over ₦750,000', "Let's discuss"
   ];
- 
+
   faqs = [
     { icon: '⚡', q: 'How fast do you respond?',            a: 'We reply within 2–4 hours during business hours. WhatsApp gets the fastest response.' },
     { icon: '💰', q: 'Is the consultation really free?',    a: 'Yes — 100% free. No credit card, no commitment. Just a conversation about your project.' },
@@ -55,11 +60,9 @@ export class ContactComponent implements AfterViewInit {
     { icon: '💳', q: 'What payment methods do you accept?', a: 'Paystack, bank transfer and Flutterwave. Instalments available for larger projects.' },
     { icon: '🔒', q: 'Is my project idea confidential?',   a: 'Completely. We treat every enquiry with full discretion and never share your ideas.' },
   ];
- 
-  
+
   constructor(private http: HttpClient) {}
 
-  
   openRegisterForm() {
     this.showRegisterForm = true;
     document.body.style.overflow = 'hidden'; // Prevent scrolling
@@ -69,6 +72,7 @@ export class ContactComponent implements AfterViewInit {
     this.showRegisterForm = false;
     this.registerSubmitted = false;
     this.registerFormSubmitted = false;
+    this.registerError = false;
     this.registerForm = {
       fullName: '',
       email: '',
@@ -84,55 +88,44 @@ export class ContactComponent implements AfterViewInit {
            this.registerForm.email.trim() !== '' &&
            this.isValidEmail(this.registerForm.email) &&
            this.registerForm.phone.trim() !== '';
-           
   }
 
-  submitRegistration() {
+  async submitRegistration() {
     this.registerFormSubmitted = true;
+    this.registerError = false;
+
     if (!this.isRegisterFormValid) return;
-    
+
     this.registerSubmitting = true;
-    
-    const formData = {
+
+    const payload = {
       fullName: this.registerForm.fullName,
-      email: this.registerForm.email,
-      phone: this.registerForm.phone,
-      source: this.registerForm.source || 'Not specified',
-      message: this.registerForm.message || 'No message provided',
-      submittedAt: new Date().toISOString(),
-      sourcePage: 'Registration Form - Contact Page'
+      email:    this.registerForm.email,
+      phone:    this.registerForm.phone,
+      source:   this.registerForm.source  || 'Not specified',
+      message:  this.registerForm.message || 'No message provided',
     };
-    
-    
-    const formspreeUrl = 'https://formspree.io/f/xjgppopv';
-    
-    this.http.post(formspreeUrl, formData, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-    .subscribe({
-      next: () => {
-        this.registerSubmitting = false;
-        this.registerSubmitted = true;
-      },
-      error: () => {
-        this.registerSubmitting = false;
-        alert('Registration failed. Please try again or contact us directly.');
-      }
-    });
+
+    try {
+      await this.http.post(`${API_BASE}/quick-register`, payload).toPromise();
+      this.registerSubmitting = false;
+      this.registerSubmitted  = true;
+    } catch (err: any) {
+      this.registerSubmitting = false;
+      this.registerError = true;
+      this.registerErrorMessage = err?.error?.message || 'Registration failed. Please try again or contact us directly.';
+    }
   }
- 
+
   // ── Validation helpers ──────────────────────────────────
   isValidEmail(email: string): boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
- 
+
   isValidPhone(phone: string): boolean {
     return phone.trim().length >= 7;
   }
- 
+
   get errors() {
     return {
       firstName: !this.form.firstName.trim(),
@@ -144,74 +137,61 @@ export class ContactComponent implements AfterViewInit {
       message:   this.form.message.trim().length < 10,
     };
   }
- 
+
   get isFormValid(): boolean {
     const e = this.errors;
     return !e.firstName && !e.lastName && !e.email && !e.phone && !e.service && !e.message;
   }
- 
+
   get errorCount(): number {
     return Object.values(this.errors).filter(Boolean).length;
   }
- 
+
   // Show error for a field only after user has tried to submit
   show(field: string): boolean {
     return this.formSubmitted && (this.errors as Record<string, boolean>)[field];
   }
- 
-  submit() {
+
+  async submit() {
     this.formSubmitted = true;
     if (!this.isFormValid) return;
-    
+
     this.submitting = true;
     this.submitError = false;
-    
-    const formData = {
+
+    const payload = {
       firstName: this.form.firstName,
-      lastName: this.form.lastName,
-      email: this.form.email,
-      phone: this.form.phone,
-      service: this.form.service,
-      budget: this.form.budget || 'Not specified',
-      message: this.form.message,
-      submittedAt: new Date().toISOString(),
-      source: 'Akiira Tech Contact Form'
+      lastName:  this.form.lastName,
+      email:     this.form.email,
+      phone:     this.form.phone,
+      service:   this.form.service,
+      budget:    this.form.budget || 'Not specified',
+      message:   this.form.message,
     };
-    
-    const formspreeUrl = 'https://formspree.io/f/xkoqavqq';
-    
-    this.http.post(formspreeUrl, formData, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-    .subscribe({
-      next: (response) => {
-        console.log('Form submitted successfully:', response);
-        this.submitted = true;
-        this.submitting = false;
-        
-        setTimeout(() => {
-          this.submitted = false;
-          this.formSubmitted = false;
-          this.resetForm();
-        }, 6000);
-      },
-      error: (error) => {
-        console.error('Error submitting form:', error);
-        this.submitting = false;
-        this.submitError = true;
-        this.errorMessage = 'Something went wrong. Please try again or contact us directly via WhatsApp.';
-        
-        setTimeout(() => {
-          this.submitError = false;
-          this.errorMessage = '';
-        }, 5000);
-      }
-    });
+
+    try {
+      await this.http.post(`${API_BASE}/contact`, payload).toPromise();
+
+      this.submitted = true;
+      this.submitting = false;
+
+      setTimeout(() => {
+        this.submitted = false;
+        this.formSubmitted = false;
+        this.resetForm();
+      }, 6000);
+    } catch (err: any) {
+      this.submitting = false;
+      this.submitError = true;
+      this.errorMessage = err?.error?.message || 'Something went wrong. Please try again or contact us directly via WhatsApp.';
+
+      setTimeout(() => {
+        this.submitError = false;
+        this.errorMessage = '';
+      }, 5000);
+    }
   }
-  
+
   resetForm() {
     this.form = {
       firstName: '', lastName: '',
@@ -219,7 +199,7 @@ export class ContactComponent implements AfterViewInit {
       service: '', budget: '', message: ''
     };
   }
- 
+
   ngAfterViewInit() {
     const obs = new IntersectionObserver(
       entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),

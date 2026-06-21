@@ -1,0 +1,142 @@
+<!-- src/app/admin/contact/contact.component.html -->
+<div class="contact-admin-page">
+
+    <div class="page-header">
+      <div>
+        <h1>Contact Submissions</h1>
+        <p>{{ total }} total submission{{ total !== 1 ? 's' : '' }}</p>
+      </div>
+    </div>
+  
+    <div class="new-submission-banner" *ngIf="newCount > 0" (click)="refreshNow()">
+      🔔 {{ newCount }} new submission{{ newCount > 1 ? 's' : '' }} — click to refresh
+    </div>
+  
+    <!-- Filters -->
+    <div class="filters-bar">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" [(ngModel)]="search" placeholder="Search name, email or phone..."
+          (keyup.enter)="search$()">
+      </div>
+      <select [(ngModel)]="status" (change)="search$()">
+        <option value="">All Statuses</option>
+        <option *ngFor="let s of statuses" [value]="s">{{ s | titlecase }}</option>
+      </select>
+      <select [(ngModel)]="service" (change)="search$()">
+        <option value="">All Services</option>
+        <option *ngFor="let s of services" [value]="s">{{ s }}</option>
+      </select>
+      <button class="filter-btn" (click)="search$()">Filter</button>
+      <button class="clear-btn" (click)="clearFilters()">Clear</button>
+      <button class="export-btn" (click)="exportCsv()" [disabled]="exporting" title="Download CSV of current filters">
+        <span *ngIf="!exporting">⬇️ Export CSV</span>
+        <span *ngIf="exporting">Preparing...</span>
+      </button>
+    </div>
+  
+    <p class="export-hint" *ngIf="status || service || search">
+      Export will include only submissions matching your current filters
+      <span *ngIf="status">· status: <strong>{{ status | titlecase }}</strong></span>
+      <span *ngIf="service">· service: <strong>{{ service }}</strong></span>
+      <span *ngIf="search">· search: <strong>"{{ search }}"</strong></span>
+    </p>
+  
+    <!-- Loading -->
+    <div class="loading-state" *ngIf="loading">
+      <div class="spinner-lg"></div><p>Loading...</p>
+    </div>
+  
+    <!-- Table -->
+    <div class="table-wrap" *ngIf="!loading">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Service</th>
+            <th>Budget</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of contacts" (click)="openModal(c)" class="table-row">
+            <td><strong>{{ c.firstName }} {{ c.lastName }}</strong></td>
+            <td>{{ c.email }}</td>
+            <td>{{ c.phone }}</td>
+            <td class="service-cell">{{ c.service }}</td>
+            <td>{{ c.budget }}</td>
+            <td>
+              <span class="status-badge"
+                [style.background]="getStatusColor(c.status) + '18'"
+                [style.color]="getStatusColor(c.status)">
+                {{ c.status }}
+              </span>
+            </td>
+            <td>{{ formatDate(c.createdAt) }}</td>
+            <td><button class="view-btn" (click)="openModal(c); $event.stopPropagation()">View</button></td>
+          </tr>
+          <tr *ngIf="!contacts.length">
+            <td colspan="8" class="empty-cell">No contact submissions found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Pagination -->
+    <div class="pagination" *ngIf="pages > 1 && !loading">
+      <button (click)="prevPage()" [disabled]="page === 1">← Prev</button>
+      <span>Page {{ page }} of {{ pages }}</span>
+      <button (click)="nextPage()" [disabled]="page === pages">Next →</button>
+    </div>
+  </div>
+  
+  <!-- Detail Modal -->
+  <div class="modal-overlay" *ngIf="modalOpen" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()" *ngIf="selected">
+      <div class="modal-top">
+        <div>
+          <h2>{{ selected.firstName }} {{ selected.lastName }}</h2>
+          <p>{{ selected.service }}</p>
+        </div>
+        <button class="close-modal" (click)="closeModal()">✕</button>
+      </div>
+  
+      <div class="modal-body">
+        <div class="detail-grid">
+          <div class="detail-item"><span class="detail-label">Email</span><span>{{ selected.email }}</span></div>
+          <div class="detail-item"><span class="detail-label">Phone</span><span>{{ selected.phone }}</span></div>
+          <div class="detail-item"><span class="detail-label">Budget</span><span>{{ selected.budget }}</span></div>
+          <div class="detail-item"><span class="detail-label">Submitted</span><span>{{ formatDate(selected.createdAt) }}</span></div>
+          <div class="detail-item full">
+            <span class="detail-label">Message</span>
+            <span>{{ selected.message }}</span>
+          </div>
+        </div>
+  
+        <div class="update-section">
+          <h3>Update Status</h3>
+          <div class="status-row">
+            <select [(ngModel)]="newStatus">
+              <option *ngFor="let s of statuses" [value]="s">{{ s | titlecase }}</option>
+            </select>
+            <button class="save-btn" (click)="saveStatus()" [disabled]="updatingStatus">
+              {{ updatingStatus ? 'Saving...' : 'Save' }}
+            </button>
+          </div>
+          <textarea [(ngModel)]="newNotes" placeholder="Add notes about this submission..." rows="3"></textarea>
+        </div>
+  
+        <div class="modal-actions">
+          <a [href]="'mailto:' + selected.email" class="action-btn email-btn">✉️ Send Email</a>
+          <a [href]="getWhatsAppLink(selected.phone)" target="_blank" class="action-btn wa-btn">💬 WhatsApp</a>
+          <button class="action-btn delete-btn" (click)="deleteContact()">
+            {{ deleteConfirm ? '⚠️ Confirm Delete' : '🗑 Delete' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
