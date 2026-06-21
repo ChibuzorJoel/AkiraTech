@@ -14,6 +14,7 @@ import { LoginComponent } from './admin/login/login.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { RegistrationComponent } from './admin/registration/registration.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AdminContactComponent } from './admin/contact/contact.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'login',         component: LoginComponent },
   { path: 'dashboard',     component: DashboardComponent,     canActivate: [AuthGuard] },
   { path: 'registrations', component: RegistrationComponent, canActivate: [AuthGuard] },
+  { path: 'admin/contact', component: AdminContactComponent, canActivate: [AuthGuard] },
   { path: '',              redirectTo: '/dashboard', pathMatch: 'full' },
   { path: '**',            redirectTo: '/dashboard' },
 

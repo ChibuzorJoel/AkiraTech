@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'; // Add this import
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
@@ -20,10 +21,10 @@ import { PrivacyPolicyComponent } from './shared/privacy-policy/privacy-policy.c
 import { LoginComponent } from './admin/login/login.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { RegistrationComponent } from './admin/registration/registration.component';
-import { AuthInterceptor } from './services/auth.interceptor';
+import { AdminContactComponent } from './admin/contact/contact.component';
 import { SidebarComponent } from './admin/sidebar/sidebar.component';
 
-
+import { AuthInterceptor } from './services/auth.interceptor';
 
 
 @NgModule({
@@ -44,14 +45,15 @@ import { SidebarComponent } from './admin/sidebar/sidebar.component';
     LoginComponent,
     DashboardComponent,
     RegistrationComponent,
+    AdminContactComponent,
     SidebarComponent,
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    CommonModule,
+    HttpClientModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
