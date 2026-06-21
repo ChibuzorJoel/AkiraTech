@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
@@ -22,15 +21,10 @@ import { PrivacyPolicyComponent } from './shared/privacy-policy/privacy-policy.c
 import { LoginComponent } from './admin/login/login.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { RegistrationComponent } from './admin/registration/registration.component';
+import { AdminContactComponent } from './admin/contact/contact.component';
 import { SidebarComponent } from './admin/sidebar/sidebar.component';
 
 import { AuthInterceptor } from './services/auth.interceptor';
-import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
-import { AdminLayoutComponent } from './admin/admin-layout/admin-layout.component';
-import { AdminContactComponent } from './admin/contact/contact.component';
-
-
-
 
 
 @NgModule({
@@ -52,8 +46,6 @@ import { AdminContactComponent } from './admin/contact/contact.component';
     RegistrationComponent,
     AdminContactComponent,
     SidebarComponent,
-    AdminHeaderComponent,
-    AdminLayoutComponent
   ],
   imports: [
     BrowserModule,

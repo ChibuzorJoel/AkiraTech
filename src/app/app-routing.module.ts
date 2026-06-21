@@ -10,7 +10,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
 
 // Admin imports
-import { AdminLayoutComponent } from './admin/admin-layout/admin-layout.component';
+
 import { LoginComponent } from './admin/login/login.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { RegistrationComponent } from './admin/registration/registration.component';
@@ -40,7 +40,7 @@ const routes: Routes = [
   // Admin protected routes - WITH SIDEBAR (via AdminLayout)
   {
     path: 'admin',
-    component: AdminLayoutComponent,
+    
     canActivate: [AuthGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
