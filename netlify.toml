@@ -1,6 +1,9 @@
 [build]
-  command = "npm run build"
+  command = "npm run build:prod"
   publish = "dist/akira-tech"
+
+[build.environment]
+  NODE_VERSION = "18.18.0"
 
 [[redirects]]
   from = "/*"
