@@ -14,10 +14,10 @@ import { ServicesComponent } from './pages/services/services.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { RegisterComponent } from './pages/register/register.component';
-
 import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
 import { TermsOfServiceComponent } from './shared/terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from './shared/privacy-policy/privacy-policy.component';
+
 import { LoginComponent } from './admin/login/login.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { RegistrationComponent } from './admin/registration/registration.component';
@@ -25,6 +25,7 @@ import { AdminContactComponent } from './admin/contact/contact.component';
 import { SidebarComponent } from './admin/sidebar/sidebar.component';
 
 import { AuthInterceptor } from './services/auth.interceptor';
+import { PaymentComponent } from './pages/payment/payment.component';
 
 
 @NgModule({
@@ -38,7 +39,6 @@ import { AuthInterceptor } from './services/auth.interceptor';
     ContactComponent,
     PortfolioComponent,
     RegisterComponent,
-
     CourseDetailComponent,
     TermsOfServiceComponent,
     PrivacyPolicyComponent,
@@ -47,6 +47,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
     RegistrationComponent,
     AdminContactComponent,
     SidebarComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +57,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
     HttpClientModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

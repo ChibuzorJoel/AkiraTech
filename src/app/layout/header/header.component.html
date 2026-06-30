@@ -1,63 +1,64 @@
-<header class="header" [class.scrolled]="isScrolled">
+<header class="header">
+
   <div class="nav-container">
 
-    <!-- Hamburger (mobile left) -->
-    <div class="hamburger-menu" [class.active]="isMenuOpen" (click)="toggleMenu()" aria-label="Open menu">
+    <!-- Hamburger Menu ( Mobile) -->
+    <div class="hamburger-menu" [class.active]="isMenuOpen" (click)="toggleMenu()">
       <span></span>
       <span></span>
       <span></span>
     </div>
 
     <!-- Logo -->
-    <a routerLink="/" class="logo">
-      <div class="logo-mark">AT</div>
+    <div class="logo">
+      <img src="assets/img/logo.jpeg" alt="Akiira Tech Logo">
       <span class="brand-name">AKIIRA <span class="tech">TECH</span></span>
-    </a>
-
-    <!-- Desktop nav -->
-    <nav class="nav-links">
-      <a routerLink="/"        routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
-      <a routerLink="/services" routerLinkActive="active">Services</a>
-      <a routerLink="/projects" routerLinkActive="active">Projects</a>
-      <a routerLink="/about"    routerLinkActive="active">About</a>
-      <a routerLink="/contact"  routerLinkActive="active">Contact</a>
-      <div class="nav-divider"></div>
-      <a routerLink="/register" class="register-nav-btn">🎓 Register Now</a>
-    </nav>
-
-    <!-- Desktop CTA -->
-    <div class="nav-cta">
-      <a routerLink="/contact" class="contact-btn">Get Started</a>
     </div>
 
+    <!-- Navigation (Desktop) -->
+    <nav class="nav-links">
+      <a routerLink="/">Home</a>
+      <a routerLink="/services">Services</a>
+      <a routerLink="/projects">Projects</a>
+      <a routerLink="/about">About</a>
+      <a routerLink="/contact">Contact</a>
+      <a routerLink="/register" class="register-nav-btn">Register Now 🎓</a>
+      
+    </nav>
+
+    <!-- CTA (Desktop) -->
+    <div class="cta">
+      <a class="contact-btn" routerLink="/contact">Get Started</a>
+    </div>
+
+    
+    
+
   </div>
+
+  <!-- Sidebar Overlay (Mobile) -->
+  <div class="sidebar-overlay" [class.active]="isMenuOpen" (click)="closeMenu()"></div>
+
+  <!-- Sidebar (Mobile) -->
+  <div class="sidebar" [class.active]="isMenuOpen">
+    
+    <!-- Sidebar Close Button -->
+    <div class="sidebar-header">
+      <button class="close-btn" (click)="closeMenu()" aria-label="Close menu">
+        <span>✕</span>
+      </button>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar-nav">
+      <a routerLink="/" (click)="closeMenu()">Home</a>
+      <a routerLink="/services" (click)="closeMenu()">Services</a>
+      <a routerLink="/projects" (click)="closeMenu()">Projects</a>
+      <a routerLink="/about" (click)="closeMenu()">About</a>
+      <a routerLink="/contact" (click)="closeMenu()">Contact</a>
+      <a routerLink="/register" (click)="closeMenu()">Register Now 🎓</a>
+      
+    </nav>
+  </div>
+
 </header>
-
-<!-- Sidebar overlay -->
-<div class="sidebar-overlay" [class.active]="isMenuOpen" (click)="closeMenu()"></div>
-
-<!-- Sidebar -->
-<div class="sidebar" [class.active]="isMenuOpen">
-
-  <div class="sidebar-header">
-    <a routerLink="/" class="logo" (click)="closeMenu()">
-      <div class="logo-mark">AT</div>
-      <span class="brand-name">AKIIRA <span class="tech">TECH</span></span>
-    </a>
-    <button class="close-btn" (click)="closeMenu()" aria-label="Close menu">✕</button>
-  </div>
-
-  <nav class="sidebar-nav">
-    <a routerLink="/"         (click)="closeMenu()"><div class="nav-icon">🏠</div> Home</a>
-    <a routerLink="/services" (click)="closeMenu()"><div class="nav-icon">⚙️</div> Services</a>
-    <a routerLink="/projects" (click)="closeMenu()"><div class="nav-icon">💼</div> Projects</a>
-    <a routerLink="/about"    (click)="closeMenu()"><div class="nav-icon">👋</div> About</a>
-    <a routerLink="/contact"  (click)="closeMenu()"><div class="nav-icon">✉️</div> Contact</a>
-  </nav>
-
-  <div class="sidebar-footer">
-    <a routerLink="/contact"  class="sidebar-cta-btn"      (click)="closeMenu()">Get Started</a>
-    <a routerLink="/register" class="sidebar-register-link" (click)="closeMenu()">🎓 Register Now</a>
-  </div>
-
-</div>

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, QueryList, ViewChildren, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, QueryList, ViewChildren, OnInit, OnDestroy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements AfterViewInit, OnInit {
+export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
 
   @ViewChildren('reveal') revealEls!: QueryList<ElementRef>;
 
@@ -22,15 +22,54 @@ export class HomeComponent implements AfterViewInit, OnInit {
     marketing: false
   };
 
+  // Advert Slider variables
+  currentSlide = 0;
+  adverts = [
+    { id: 1, title: 'Brand Mission' },
+    { id: 2, title: 'Product Validation' }
+  ];
+  private slideInterval: any;
+
   ngOnInit(): void {
     // Initialize video autoplay when component loads
     this.initVideoAutoplay();
     // Check cookie consent
     this.checkCookieConsent();
+    // Start advert slider auto-slide
+    this.startSlideInterval();
+  }
+
+  ngOnDestroy(): void {
+    // Clear interval when component is destroyed
+    if (this.slideInterval) {
+      clearInterval(this.slideInterval);
+    }
   }
 
   ngAfterViewInit(): void {
     this.initRevealAnimations();
+  }
+
+  // Advert Slider methods
+  startSlideInterval(): void {
+    this.slideInterval = setInterval(() => {
+      this.nextSlide();
+    }, 5000); // Change slide every 5 seconds
+  }
+
+  nextSlide(): void {
+    this.currentSlide = (this.currentSlide + 1) % this.adverts.length;
+  }
+
+  prevSlide(): void {
+    this.currentSlide = (this.currentSlide - 1 + this.adverts.length) % this.adverts.length;
+  }
+
+  goToSlide(index: number): void {
+    this.currentSlide = index;
+    // Reset auto-slide timer when user manually navigates
+    clearInterval(this.slideInterval);
+    this.startSlideInterval();
   }
 
   private checkCookieConsent(): void {

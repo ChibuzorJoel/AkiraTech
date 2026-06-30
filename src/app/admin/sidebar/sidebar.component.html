@@ -1,17 +1,12 @@
 <!-- sidebar.component.html -->
-<aside class="sidebar" [class.collapsed]="collapsed">
-    <div class="sidebar-header">
-      <div class="brand" *ngIf="!collapsed">
-        <div class="brand-mark">AT</div>
-        <div>
-          <span class="brand-name">AKIIRA <span>TECH</span></span>
-          <span class="brand-sub">Admin</span>
-        </div>
+<aside class="sidebar" [class.collapsed]="collapsed" *ngIf="!isLoginPage">
+  <div class="sidebar-header">
+    <div class="brand" *ngIf="!collapsed">
+      <div class="brand-mark">AT</div>
+      <div>
+        <span class="brand-name">AKIIRA <span>TECH</span></span>
+        <span class="brand-sub">Admin</span>
       </div>
-      <div class="brand-mark" *ngIf="collapsed">AT</div>
-      <button class="collapse-btn" (click)="collapsed = !collapsed">
-        {{ collapsed ? '→' : '←' }}
-      </button>
     </div>
   
     <nav class="sidebar-nav">
@@ -35,4 +30,4 @@
         <span *ngIf="!collapsed">Logout</span>
       </button>
     </div>
-  </aside>
+  

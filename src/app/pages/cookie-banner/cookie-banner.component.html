@@ -36,7 +36,9 @@
             <div class="cb-cookie-text">
               <span class="cb-cookie-label">{{ cookie.label }}</span>
               <span class="cb-cookie-desc">{{ cookie.description }}</span>
-              <span class="cb-cookie-examples">e.g. {{ cookie.examples }}</span>
+              <span class="cb-cookie-examples">
+                e.g. {{ cookie.examples }}
+              </span>
             </div>
           </div>
 
@@ -66,19 +68,26 @@
     </div>
 
     <div class="cb-actions">
-      <button class="cb-btn cb-btn-reject" (click)="rejectAll()">Reject All</button>
+      <button class="cb-btn cb-btn-reject" (click)="rejectAll()">
+        Reject All
+      </button>
 
-      <button *ngIf="showDetails"
-              class="cb-btn cb-btn-custom"
-              (click)="saveCustom()">
+      <button
+        *ngIf="showDetails"
+        class="cb-btn cb-btn-custom"
+        (click)="saveCustom()">
         Save Preferences
       </button>
 
-      <button class="cb-btn cb-btn-accept" (click)="acceptAll()">Accept All</button>
+      <button class="cb-btn cb-btn-accept" (click)="acceptAll()">
+        Accept All
+      </button>
     </div>
 
     <div class="cb-footer">
-      <a routerLink="/privacy-policy" class="cb-footer-link">Privacy Policy</a>
+      <a routerLink="/privacy-policy" class="cb-footer-link">
+        Privacy Policy
+      </a>
       <span class="cb-footer-sep">·</span>
       <span class="cb-footer-text">© 2025 Akiira Tech</span>
     </div>

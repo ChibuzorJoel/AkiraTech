@@ -1,4 +1,13 @@
 /* sidebar.component.css */
+
+
+/* Hide sidebar on login page (handled by *ngIf) */
+.sidebar.hidden {
+  display: none !important;
+}
+
+/* Rest of your existing CSS... */
+
 .sidebar {
     width: 240px; min-height: 100vh;
     background: #0a0514;

@@ -88,6 +88,7 @@ export class CookieBannerComponent implements OnInit {
       marketing: true,
       functional: true
     };
+
     this.save();
   }
 
@@ -98,6 +99,7 @@ export class CookieBannerComponent implements OnInit {
       marketing: false,
       functional: false
     };
+
     this.save();
   }
 
@@ -107,6 +109,7 @@ export class CookieBannerComponent implements OnInit {
 
   togglePreference(key: CookieKey): void {
     if (key === 'necessary') return;
+
     this.preferences[key] = !this.preferences[key];
   }
 

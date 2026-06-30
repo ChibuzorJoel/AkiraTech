@@ -1,0 +1,207 @@
+<!-- src/app/pages/payment/payment.component.html -->
+<div class="payment-page">
+
+    <!-- Hero -->
+    <section class="payment-hero">
+      <div class="payment-hero-bg"></div>
+      <div class="payment-hero-inner">
+        <button class="back-btn" (click)="goBack()">← Back to Registration</button>
+        <div class="eyebrow-badge">🔒 Secure Checkout</div>
+        <h1>Complete Your <span>Enrollment</span></h1>
+        <p>One step away from starting your tech journey with Akiira Tech</p>
+      </div>
+    </section>
+  
+    <!-- Main content -->
+    <section class="payment-content">
+      <div class="payment-container">
+  
+        <!-- Loading -->
+        <div class="loading-state" *ngIf="loadingPrice">
+          <div class="spinner"></div>
+          <p>Loading course details...</p>
+        </div>
+  
+        <!-- Price error -->
+        <div class="page-error" *ngIf="priceError && !loadingPrice">
+          <span>❌ {{ priceError }}</span>
+          <button (click)="loadPrice()">Retry</button>
+        </div>
+  
+        <div class="payment-body" *ngIf="!loadingPrice && !priceError">
+  
+          <!-- ── LEFT: Order summary ── -->
+          <div class="order-side">
+  
+            <div class="summary-card">
+              <div class="summary-head">
+                <span class="summary-icon">🎓</span>
+                <h2>Order Summary</h2>
+              </div>
+  
+              <div class="summary-row">
+                <span class="summary-label">Student</span>
+                <span class="summary-value">{{ fullName }}</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">Email</span>
+                <span class="summary-value email-val">{{ email }}</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-label">Course</span>
+                <span class="summary-value course-val">{{ course }}</span>
+              </div>
+              <div class="summary-divider"></div>
+              <div class="summary-row total-row">
+                <span class="summary-label">Total</span>
+                <span class="summary-total">{{ formatted }}</span>
+              </div>
+              <div class="secure-note">
+                <span>🔒</span>
+                <span>100% Secure · Encrypted · Safe</span>
+              </div>
+            </div>
+  
+            <div class="help-card">
+              <p>Need help with payment?</p>
+              <a href="https://wa.me/2349021706710" target="_blank" class="wa-help-btn">
+                💬 Chat on WhatsApp
+              </a>
+            </div>
+          </div>
+  
+          <!-- ── RIGHT: Payment method ── -->
+          <div class="methods-side">
+  
+            <h2 class="methods-title">Choose Payment Method</h2>
+            <p class="methods-sub">Both options are safe and accepted</p>
+  
+            <!-- Error banner -->
+            <div class="error-banner" *ngIf="error">❌ {{ error }}</div>
+  
+            <!-- Option 1: Payaza -->
+            <div class="method-card"
+                 [class.active]="selectedMethod === 'payaza'"
+                 (click)="selectMethod('payaza')">
+              <div class="method-radio" [class.checked]="selectedMethod === 'payaza'">
+                <div class="radio-inner"></div>
+              </div>
+              <div class="method-icon">💳</div>
+              <div class="method-text">
+                <h3>Pay Online via Payaza</h3>
+                <p>Debit card, USSD, bank transfer — powered by Payaza secure checkout</p>
+                <div class="method-tags">
+                  <span class="tag">Instant</span>
+                  <span class="tag">All cards</span>
+                  <span class="tag recommended-tag">Recommended</span>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Option 2: Bank Transfer -->
+            <div class="method-card"
+                 [class.active]="selectedMethod === 'bank_transfer'"
+                 (click)="selectMethod('bank_transfer')">
+              <div class="method-radio" [class.checked]="selectedMethod === 'bank_transfer'">
+                <div class="radio-inner"></div>
+              </div>
+              <div class="method-icon">🏦</div>
+              <div class="method-text">
+                <h3>Direct Bank Transfer</h3>
+                <p>Transfer to our Kuda account and enter your reference below</p>
+                <div class="method-tags">
+                  <span class="tag">Manual · 2–4 hrs</span>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Bank transfer expanded section -->
+            <div class="bank-section" *ngIf="selectedMethod === 'bank_transfer'">
+  
+              <div class="bank-details-card">
+                <h3>Transfer to this account</h3>
+                <div class="bank-row">
+                  <span class="bank-lbl">Bank</span>
+                  <span class="bank-val">{{ bankDetails.bankName }}</span>
+                </div>
+                <div class="bank-row">
+                  <span class="bank-lbl">Account Number</span>
+                  <div class="bank-val-copy">
+                    <strong>{{ bankDetails.accountNumber }}</strong>
+                    <button class="copy-btn" (click)="copyToClipboard(bankDetails.accountNumber)">
+                      📋 Copy
+                    </button>
+                  </div>
+                </div>
+                <div class="bank-row">
+                  <span class="bank-lbl">Account Name</span>
+                  <span class="bank-val">{{ bankDetails.accountName }}</span>
+                </div>
+                <div class="bank-row">
+                  <span class="bank-lbl">Amount</span>
+                  <span class="bank-val amount-highlight">{{ formatted }}</span>
+                </div>
+                <div class="bank-warning">
+                  ⚠️ Use your <strong>full name</strong> as the narration/description when transferring
+                </div>
+              </div>
+  
+              <div class="ref-section">
+                <div class="form-field">
+                  <label>Transaction Reference / Teller Number <span class="req">*</span></label>
+                  <input
+                    type="text"
+                    [(ngModel)]="transferReference"
+                    placeholder="e.g. TRF202400001234 or session ID from your bank"
+                    [class.field-error]="showRefError">
+                  <p class="field-hint" *ngIf="!showRefError">Enter the reference number shown on your bank receipt or app</p>
+                  <p class="field-error-msg" *ngIf="showRefError">Please enter your transfer reference number</p>
+                </div>
+  
+                <div class="form-field">
+                  <label>Additional Note <span class="opt">(optional)</span></label>
+                  <textarea
+                    [(ngModel)]="receiptNote"
+                    placeholder="e.g. Transferred from Access Bank, pending since morning..."
+                    rows="2">
+                  </textarea>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Submit CTA -->
+            <button
+              class="pay-btn"
+              [class.btn-disabled]="!canSubmit || submitting"
+              [disabled]="!canSubmit || submitting"
+              (click)="submit()">
+  
+              <ng-container *ngIf="!submitting">
+                <span *ngIf="selectedMethod === 'payaza'">
+                  💳 Pay {{ formatted }} via Payaza →
+                </span>
+                <span *ngIf="selectedMethod === 'bank_transfer'">
+                  🏦 Submit Bank Transfer →
+                </span>
+                <span *ngIf="!selectedMethod">
+                  Select a payment method above
+                </span>
+              </ng-container>
+  
+              <ng-container *ngIf="submitting">
+                <span class="btn-spinner"></span>
+                <span *ngIf="selectedMethod === 'payaza'">Redirecting to Payaza...</span>
+                <span *ngIf="selectedMethod === 'bank_transfer'">Submitting...</span>
+              </ng-container>
+            </button>
+  
+            <p class="security-footer">
+              🔒 Your information is encrypted and never shared.
+              We do not store card details.
+            </p>
+  
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
