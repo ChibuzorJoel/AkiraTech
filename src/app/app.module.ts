@@ -25,6 +25,7 @@ import { AdminContactComponent } from './admin/contact/contact.component';
 import { SidebarComponent } from './admin/sidebar/sidebar.component';
 
 import { AuthInterceptor } from './services/auth.interceptor';
+import { PaymentComponent } from './pages/payment/payment.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
     RegistrationComponent,
     AdminContactComponent,
     SidebarComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
