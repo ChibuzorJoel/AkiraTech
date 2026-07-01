@@ -153,58 +153,113 @@ CONTACT BAR
 </div>
 
 <!-- ══════════════════════════════════════════════════════════
-ADVERTISEMENTS HERO SLIDER
+ADVERTISEMENTS SECTION
 ══════════════════════════════════════════════════════════ -->
-<section class="adverts-hero-section">
-  <div class="adverts-hero-container">
+<section class="adverts-section">
+  <div class="adverts-container">
     
-    <!-- Slider Wrapper -->
-    <div class="adverts-hero-wrapper">
+    <!-- Section Header -->
+    <div class="adverts-header" #reveal>
+      <div class="eyebrow">Featured</div>
+      <h2 class="section-title">What We're <span>Building</span></h2>
+      <p class="section-sub">Explore our latest initiatives and services</p>
+    </div>
+
+    <!-- Desktop Grid (2 columns) -->
+    <div class="adverts-grid">
       
-      <!-- Slider Track -->
-      <div class="adverts-hero-track" [style.transform]="'translateX(-' + currentSlide * 100 + '%)'">
-        
-        <!-- Slide 1 - Main Brand Advert -->
-        <div class="advert-hero-slide">
-          <div class="advert-hero-bg">
-            <img src="assets/img/photo_2026-06-27_18-03-30 (2).jpg" alt="Akiira Tech - Building Possibilities" class="advert-hero-image">
-            <div class="advert-hero-overlay"></div>
+      <!-- Card 1 - Main Brand Advert -->
+      <div class="advert-card" #reveal>
+        <div class="advert-image-wrapper">
+          <img src="assets/img/photo_2026-06-27_18-03-30 (2).jpg" alt="Akiira Tech - Building Possibilities" class="advert-card-image">
+        </div>
+        <div class="advert-card-content">
+          <div class="advert-card-badge">✨ Our Mission</div>
+          <h3>Building Possibilities, One Idea at a Time</h3>
+          <p>Every great innovation starts with an idea. What transforms that idea into impact is the right technology and the right team.</p>
+          <div class="advert-card-message">
+            <span>💜 Your vision.</span>
+            <span>💚 Our expertise.</span>
+            <span>🚀 Endless possibilities.</span>
           </div>
-          
+          <a routerLink="/contact" class="advert-card-btn">Let's Build Together →</a>
+        </div>
+      </div>
+
+      <!-- Card 2 - Proof/Validation Advert -->
+      <div class="advert-card" #reveal>
+        <div class="advert-image-wrapper">
+          <img src="assets/img/photo_2026-06-27_18-03-42.jpg" alt="Proof - Product Validation" class="advert-card-image">
+        </div>
+        <div class="advert-card-content">
+          <div class="advert-card-badge proof">🔥 New Service</div>
+          <h3>Validate Your Idea Before You Build</h3>
+          <p>Don't waste time and money building something nobody wants. We help founders test their ideas with real customer research and market validation.</p>
+          <div class="advert-card-features">
+            <span>✔️ Customer Surveys</span>
+            <span>✔️ Market Research</span>
+            <span>✔️ NDA Protected</span>
+            <span>✔️ Data-Driven Reports</span>
+          </div>
+          <a href="https://forms.gle/m3FKzyGkdRxbJLxHA" class="advert-card-btn" target="_blank">Start Validation →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Mobile Slider (Single column with swipe) -->
+    <div class="mobile-slider-wrapper">
+      <div class="mobile-slider-track" [style.transform]="'translateX(-' + currentSlide * 100 + '%)'">
+        
+        <!-- Card 1 - Mobile Slide -->
+        <div class="advert-card">
+          <div class="advert-image-wrapper">
+            <img src="assets/img/photo_2026-06-27_18-03-30 (2).jpg" alt="Akiira Tech - Building Possibilities" class="advert-card-image">
+          </div>
+          <div class="advert-card-content">
+            <div class="advert-card-badge">✨ Our Mission</div>
+            <h3>Building Possibilities, One Idea at a Time</h3>
+            <p>Every great innovation starts with an idea. What transforms that idea into impact is the right technology and the right team.</p>
+            <div class="advert-card-message">
+              <span>💜 Your vision.</span>
+              <span>💚 Our expertise.</span>
+              <span>🚀 Endless possibilities.</span>
+            </div>
+            <a routerLink="/contact" class="advert-card-btn">Let's Build Together →</a>
+          </div>
         </div>
 
-        <!-- Slide 2 - Proof/Validation Advert -->
-        <div class="advert-hero-slide">
-          <div class="advert-hero-bg">
-            <img src="assets/img/photo_2026-06-27_18-03-42.jpg" alt="Proof - Product Validation" class="advert-hero-image">
-            <div class="advert-hero-overlay"></div>
+        <!-- Card 2 - Mobile Slide -->
+        <div class="advert-card">
+          <div class="advert-image-wrapper">
+            <img src="assets/img/photo_2026-06-27_18-03-42.jpg" alt="Proof - Product Validation" class="advert-card-image">
           </div>
-          <div class="advert-hero-content">
-           
+          <div class="advert-card-content">
+            <div class="advert-card-badge proof">🔥 New Service</div>
+            <h3>Validate Your Idea Before You Build</h3>
+            <p>Don't waste time and money building something nobody wants. We help founders test their ideas with real customer research and market validation.</p>
+            <div class="advert-card-features">
+              <span>✔️ Customer Surveys</span>
+              <span>✔️ Market Research</span>
+              <span>✔️ NDA Protected</span>
+              <span>✔️ Data-Driven Reports</span>
+            </div>
+            <a href="https://forms.gle/m3FKzyGkdRxbJLxHA" class="advert-card-btn" target="_blank">Start Validation →</a>
           </div>
         </div>
 
       </div>
-    </div>
 
-    <!-- Navigation Controls -->
-    <button class="hero-slider-nav prev" (click)="prevSlide()" aria-label="Previous advert">
-      <span>‹</span>
-    </button>
-    <button class="hero-slider-nav next" (click)="nextSlide()" aria-label="Next advert">
-      <span>›</span>
-    </button>
-
-    <!-- Dots Indicator -->
-    <div class="hero-slider-dots">
-      <span class="hero-dot" *ngFor="let advert of adverts; let i = index" 
-            [class.active]="currentSlide === i"
-            (click)="goToSlide(i)"></span>
+      <!-- Mobile Dots -->
+      <div class="mobile-slider-dots">
+        <span class="mobile-dot" *ngFor="let advert of adverts; let i = index" 
+              [class.active]="currentSlide === i"
+              (click)="goToSlide(i)"></span>
+      </div>
     </div>
 
   </div>
 </section>
-
 <!-- ══════════════════════════════════════════════════════════
 SERVICES
 ══════════════════════════════════════════════════════════ -->

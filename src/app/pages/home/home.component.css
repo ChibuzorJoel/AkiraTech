@@ -838,264 +838,357 @@
      .service-grid { grid-template-columns: 1fr; }
    }
 
-   /* ── ADVERTISEMENTS HERO SLIDER ────────────────────────────────────── */
-.adverts-hero-section {
-  padding: 40px 32px 20px;
+ /* ── ADVERTISEMENTS SECTION ────────────────────────────────────── */
+.adverts-section {
+  padding: 80px 32px;
   background: var(--bg);
   position: relative;
 }
 
-.adverts-hero-container {
-  max-width: 900px; /* Reduced to fit the image proportions better */
+.adverts-container {
+  max-width: 1200px;
+  max-height: 100%;
   margin: 0 auto;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-.adverts-hero-wrapper {
+.adverts-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.adverts-header .eyebrow {
+  display: inline-block;
+  background: rgba(107, 191, 115, 0.1);
+  border: 1px solid rgba(107, 191, 115, 0.3);
+  color: var(--green);
+  padding: 5px 14px;
+  border-radius: 100px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.adverts-header .section-title {
+  font-family: var(--font-head);
+  font-size: clamp(1.9rem, 3vw, 2.7rem);
+  font-weight: 800;
+  color: var(--white);
+  text-align: center;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.adverts-header .section-title span {
+  background: linear-gradient(90deg, var(--purple-soft), var(--green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.adverts-header .section-sub {
+  font-size: 1rem;
+  color: var(--muted);
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.78;
+}
+
+/* Grid */
+.adverts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+/* Card */
+.advert-card {
+  background: var(--bg2);
+  border-radius: 20px;
   overflow: hidden;
-  border-radius: 24px;
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.advert-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* Image Wrapper */
+.advert-image-wrapper {
   width: 100%;
+  height: 550px;
+  overflow: hidden;
   position: relative;
+  background: var(--bg);
 }
 
-.adverts-hero-track {
+.advert-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: inherit;
+  display: flexbox;
+  transition: transform 0.5s ease;
+}
+
+.advert-card:hover .advert-card-image {
+  transform: scale(1.03);
+}
+
+/* Card Content */
+.advert-card-content {
+  padding: 24px 28px 28px;
+}
+
+.advert-card-badge {
+  display: inline-block;
+  background: rgba(107, 191, 115, 0.15);
+  color: var(--green);
+  padding: 3px 14px;
+  border-radius: 100px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+.advert-card-badge.proof {
+  background: rgba(251, 191, 36, 0.15);
+  color: #f59e0b;
+}
+
+.advert-card-content h3 {
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.advert-card-content > p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.advert-card-message {
   display: flex;
-  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin: 10px 0 16px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  border-left: 3px solid var(--green);
+}
+
+.advert-card-message span {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+.advert-card-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 16px;
+}
+
+.advert-card-features span {
+  font-size: 0.75rem;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 3px 12px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+}
+
+.advert-card-btn {
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--green), var(--green-dark));
+  color: white;
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 4px;
+  text-align: center;
   width: 100%;
+}
+
+.advert-card-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(107, 191, 115, 0.4);
+}
+
+/* ── Mobile Slider Styles ── */
+.mobile-slider-wrapper {
+  display: none;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.mobile-slider-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
 
-.advert-hero-slide {
-  min-width: 100%;
-  flex-shrink: 0;
+.mobile-slider-track .advert-card {
   flex: 0 0 100%;
-  position: relative;
-  aspect-ratio: 1074 / 1280;
-  
+  min-width: 100%;
+  margin-right: 0;
 }
 
-.advert-hero-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+.mobile-slider-track .advert-card:hover {
+  transform: none;
+  box-shadow: none;
 }
 
-.advert-hero-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-  
-}
-
-.advert-hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, 
-    rgba(8, 4, 18, 0.1) 0%, 
-    rgba(8, 4, 18, 0.3) 60%,
-    rgba(8, 4, 18, 0.6) 100%
-  );
-  z-index: 1;
-  pointer-events: none;
-}
-
-.advert-hero-content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  padding: 30px 30px 40px;
-}
-
-
-/* Navigation Controls */
-.hero-slider-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: white;
-  font-size: 1.6rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-
-.hero-slider-nav:hover {
-  background: rgba(107, 191, 115, 0.4);
-  transform: translateY(-50%) scale(1.08);
-}
-
-.hero-slider-nav.prev {
-  left: 16px;
-}
-
-.hero-slider-nav.next {
-  right: 16px;
-}
-
-/* Dots */
-.hero-slider-dots {
-  display: flex;
+/* Mobile Navigation Dots */
+.mobile-slider-dots {
+  display: none;
   justify-content: center;
   gap: 10px;
-  padding: 18px 0 10px;
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
+  margin-top: 24px;
+  padding-bottom: 4px;
 }
 
-.hero-dot {
+.mobile-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
   cursor: pointer;
   transition: all 0.3s ease;
   border: none;
   padding: 0;
 }
 
-.hero-dot.active {
+.mobile-dot.active {
   background: var(--green);
   width: 28px;
   border-radius: 5px;
 }
 
-.hero-dot:hover {
-  background: rgba(255, 255, 255, 0.6);
+.mobile-dot:hover {
+  background: rgba(255, 255, 255, 0.4);
 }
 
-/* Responsive */
+/* ── Responsive ── */
 @media (max-width: 1024px) {
-  .adverts-hero-container {
-    max-width: 100%;
-  }
-  
-  .advert-hero-slide {
-    aspect-ratio: 1074 / 1280;
+  .adverts-grid {
+    gap: 24px;
   }
 }
 
 @media (max-width: 768px) {
-  .adverts-hero-section {
-    padding: 30px 16px 10px;
+  .adverts-section {
+    padding: 60px 20px;
   }
 
-  .advert-hero-slide {
-    aspect-ratio: 1074 / 1280;
+  /* Hide desktop grid on mobile */
+  .adverts-grid {
+    display: none;
   }
 
-  .advert-hero-content {
-    padding: 20px 20px 30px;
+  /* Show mobile slider */
+  .mobile-slider-wrapper {
+    display: block;
   }
 
-  .advert-hero-btn {
-    padding: 12px 28px;
-    font-size: 0.85rem;
+  .mobile-slider-dots {
+    display: flex;
   }
 
-  .advert-hero-overlay {
-    background: linear-gradient(to bottom, 
-      rgba(8, 4, 18, 0.1) 0%, 
-      rgba(8, 4, 18, 0.4) 50%,
-      rgba(8, 4, 18, 0.7) 100%
-    );
+  /* Mobile card image height */
+  .mobile-slider-wrapper .advert-image-wrapper {
+    height: 600px;
+    width:750px;
   }
 
-  .hero-slider-nav {
-    width: 36px;
-    height: 36px;
-    font-size: 1.2rem;
+  .mobile-slider-wrapper .advert-card-content {
+    padding: 20px 20px 24px;
   }
 
-  .hero-slider-nav.prev {
-    left: 10px;
+  .mobile-slider-wrapper .advert-card-content h3 {
+    font-size: 1.1rem;
   }
 
-  .hero-slider-nav.next {
-    right: 10px;
+  .mobile-slider-wrapper .advert-card-btn {
+    padding: 10px 20px;
+    font-size: 0.8rem;
+  }
+
+  /* Remove hover effects on mobile */
+  .mobile-slider-wrapper .advert-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .mobile-slider-wrapper .advert-card:hover .advert-card-image {
+    transform: none;
   }
 }
 
 @media (max-width: 480px) {
-  .adverts-hero-section {
-    padding: 20px 12px 8px;
+  .adverts-section {
+    padding: 40px 16px;
   }
 
-  .advert-hero-slide {
-    aspect-ratio: 1074 / 1280;
-    border-radius: 16px;
+  .mobile-slider-wrapper .advert-image-wrapper {
+    height: 320px;
+    width:400px;
   }
 
-  .adverts-hero-container {
-    border-radius: 16px;
+  .mobile-slider-wrapper .advert-card-content {
+    padding: 16px 16px 20px;
   }
 
-  .adverts-hero-wrapper {
-    border-radius: 16px;
-  }
-
-  .advert-hero-content {
-    padding: 16px 16px 24px;
-  }
-
-  .advert-hero-btn {
-    padding: 10px 22px;
-    font-size: 0.75rem;
-    border-radius: 8px;
-  }
-
-  .advert-hero-overlay {
-    background: linear-gradient(to bottom, 
-      rgba(8, 4, 18, 0.15) 0%, 
-      rgba(8, 4, 18, 0.5) 40%,
-      rgba(8, 4, 18, 0.8) 100%
-    );
-  }
-
-  .hero-slider-nav {
-    width: 30px;
-    height: 30px;
+  .mobile-slider-wrapper .advert-card-content h3 {
     font-size: 1rem;
   }
 
-  .hero-slider-nav.prev {
-    left: 6px;
+  .mobile-slider-wrapper .advert-card-content > p {
+    font-size: 0.82rem;
   }
 
-  .hero-slider-nav.next {
-    right: 6px;
+  .mobile-slider-wrapper .advert-card-message span {
+    font-size: 0.75rem;
   }
 
-  .hero-slider-dots {
-    bottom: -4px;
-    gap: 6px;
+  .mobile-slider-wrapper .advert-card-features span {
+    font-size: 0.7rem;
+    padding: 2px 10px;
   }
 
-  .hero-dot {
+  .mobile-slider-wrapper .advert-card-btn {
+    padding: 8px 16px;
+    font-size: 0.75rem;
+  }
+
+  .mobile-slider-dots {
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .mobile-dot {
     width: 8px;
     height: 8px;
   }
 
-  .hero-dot.active {
+  .mobile-dot.active {
     width: 20px;
   }
 }
